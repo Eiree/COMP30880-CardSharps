@@ -1,4 +1,4 @@
-package com.cardsharps;
+package blackjack;
 
 import static org.junit.Assert.assertTrue;
 
