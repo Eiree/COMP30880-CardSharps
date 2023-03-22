@@ -442,34 +442,10 @@ public class PokerHand
 		
 		PokerHand category = this;
 		
-		if (isRoyalFlush())
-			category = new RoyalFlush(hand, deck);
-		else
-		if (isStraightFlush())
-			category = new StraightFlush(hand, deck);
-		else
-		if (isStraight())
-			category = new Straight(hand, deck);
-		else
-		if (isFourOfAKind())
-			category = new FourOfAKind(hand, deck);
-		else
-		if (isFlush())
-			category = new Flush(hand, deck);
-		else
-		if (isFullHouse())
-			category = new FullHouse(hand, deck);
-		else
-		if (isThreeOfAKind())
-			category = new ThreeOfAKind(hand, deck);
-		else
-		if (isTwoPair())
-			category = new TwoPair(hand, deck);
-		else
-		if (isPair())
+		/*if (isPair())
 			category = new Pair(hand, deck);
 		else
-			category = new High(hand, deck);
+			category = new High(hand, deck);*/
 		
 		category.setNumDiscarded(getNumDiscarded()); // track how many cards discarded
 		

@@ -35,13 +35,11 @@ public class GameOfBlackjack {
 
     public int getNumSolventPlayers() {
         // how many players still have money left?
-
         int count = 0;
 
         for (int i = 0; i < getNumPlayers(); i++)
             if (getPlayer(i) != null && !getPlayer(i).isBankrupt())
                 count++;
-
         return count;
     }
 
@@ -50,7 +48,6 @@ public class GameOfBlackjack {
     public void play() {
         while (getNumSolventPlayers() > 1) {
             RoundOfPoker round = new RoundOfPoker(deck, players);
-
             round.play();
             
         }
