@@ -1,15 +1,11 @@
 package blackjack;
 import poker.*;
 
-public class BlackjackHumanPlayer extends BlackjackPlayer {
-
-
+public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by abstract methods such as shouldSplit etc
     //constructor
     public BlackjackHumanPlayer(String name, int money){
         super(name, money);
     }
-
-
 
 
     // todo (verify) DECISIONS
@@ -42,7 +38,31 @@ public class BlackjackHumanPlayer extends BlackjackPlayer {
                     addCount(pot.getCurrentStake() - getStake(), "chip", "chips"));
     }
 
-    public boolean shouldSplit(PotOfMoney pot){
-        return false; //need to implement this someway
+    public boolean shouldDouble(PotOfMoney pot) { // TODO---------------
+       return false;
+    }
+
+    public boolean shouldHit(PotOfMoney pot) { // TODO---------------
+        /* total value of all cards
+        if (total <= 11) {
+            return true; // always hit if hand value is less than or equal to 11
+        } else if (total == 12) {
+            int dealerCardValue = pot.getDealerCardValue(); //require to implement dealer cards and their values
+            if (dealerCardValue >= 4 && dealerCardValue <= 6) {
+                return false; // stand if dealer has a 4, 5, or 6
+            } else {
+                return true; // hit otherwise
+            }
+        } else if (total >= 13 && total <= 16) {
+            int dealerCardValue = pot.getDealerCardValue();
+            if (dealerCardValue >= 2 && dealerCardValue <= 6) {
+                return false; // stand if dealer has a 2, 3, 4, 5, or 6
+            } else {
+                return true; // hit otherwise
+            }
+        } else {
+            return false; // stand if hand value is 17 or greater
+        }*/
+        return false;
     }
 }

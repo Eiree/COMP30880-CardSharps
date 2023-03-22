@@ -88,7 +88,7 @@ public class RoundOfBlackjack {
             if (player == null || player.isBankrupt()){
                 continue;
             }
-            //implement logic for blackjack and continue with current card.
+            //implement logic for blackjack and continue with current card. TODO
         }
     }
 
@@ -109,7 +109,7 @@ public class RoundOfBlackjack {
 
                 delay(DELAY_BETWEEN_ACTIONS);
 
-                //check active players, if player wins takePot(pot) etc
+                //check active players, if player wins takePot(pot) etc TODO
 
 
                 if (currentPlayer.hasSurrendered()){
@@ -124,7 +124,7 @@ public class RoundOfBlackjack {
             return;
         }
 
-        //define winners?
+        //define winners? TODO
     }
 
 
@@ -134,7 +134,5 @@ public class RoundOfBlackjack {
         } catch (Exception e) {
         }
     }
-
-
 
 }

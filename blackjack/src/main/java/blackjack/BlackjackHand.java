@@ -53,8 +53,12 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         }
     }
 
+    public Card[] getCards(){ //might need to test this
+        return hand;
+    }
+
     public int getValue(){ //gets value of card
-        return getCard(0).getValue();
+        return getCard(0).getValue(); //index 0?
     }
 
     public int getNumCards(){
@@ -92,7 +96,6 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         }
     }
 
-
     //hand classifer
     public boolean isBlackjack(){
         if (getNumCards() != 2){
@@ -100,6 +103,28 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         }
         int handValue = getHandValue();
         if (handValue == 21){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isBust(){
+        int handValue = getHandValue();
+        if (handValue > 21){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isSplit(){
+        if (getNumCards() != 2){
+            return false;
+        }
+        int cardValue1 = getCard(0).getValue();
+        int cardValue2 = getCard(1).getValue();
+
+        if (cardValue1 == cardValue2){
             return true;
         }
         return false;

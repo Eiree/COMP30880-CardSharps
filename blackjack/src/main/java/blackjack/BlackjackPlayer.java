@@ -1,4 +1,5 @@
 package blackjack;
+
 import poker.*;
 
 abstract class BlackjackPlayer { //reference player.java, humanplayer.java and computerplayer.java
@@ -6,6 +7,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     private int stake = 0; //players bet
     private String name = ""; //UID for player name
     private BlackjackHand hand = null; //hand dealth to player
+    //private BlackjackHand secondHand = null; //might need if a player splits
     private boolean bust = false; //check for bust
     private boolean surrendered = false; //essentially a fold system where players gets back half bet.
     //private boolean win = false; //win condition check potentially?
@@ -26,12 +28,16 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
 
     public String toString(){ //handle events in game to display to user
         return "";
-        //check for win/bust
+        //check for win/bust TODO
     }
 
     //getters
     public BlackjackHand getHand(){
         return hand;
+    }
+
+    public Card getCard(int index){
+        return hand.getCard(index);
     }
 
     public int getBank(){
@@ -83,6 +89,43 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
     }
 
+    public void hit(BlackjackDeck deck){ //TODO
+        //implement hit functionality
+    }
+
+    public void stand(){ //TODO
+        //nothing
+    }
+
+    public void doubleDown(BlackjackDeck deck, PotOfMoney pot){
+        if (bank < stake) {
+            System.out.println("\n> " + getName() + " says: I can't afford to double down!");
+            return;
+        }
+        bank -= stake;
+        stake *= 2;
+        pot.raiseStake(stake);
+        hit(deck);
+        stand();
+    }
+
+    public boolean canSplit() {
+        return hand.isSplit() && bank >= stake;
+    }
+
+    //split logic? -- unsure TODO
+    /*public BlackjackHand split(BlackjackDeck deck, PotOfMoney pot){
+        if (!canSplit()){
+            return null;
+        }
+        Card[] cards = hand.getCards();
+        hand = new BlackjackHand(deck);
+        //hand.addCard(cards[0]);
+        bank -= stake;
+        pot.raiseStake(stake);
+        return new BlackjackHand(new Card[]{cards[1]}, deck);
+    }*/
+
     public void openBetting(PotOfMoney pot){
         if (bank == 0){
             return;
@@ -110,12 +153,14 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     //Key decisions
     abstract boolean shouldOpen(PotOfMoney pot);
     abstract boolean shouldSee(PotOfMoney pot);
-    //change of pot if split
+
     abstract boolean shouldSplit(PotOfMoney pot);
+    abstract boolean shouldHit(PotOfMoney pot);
+    abstract boolean shouldDouble(PotOfMoney pot);
 
 
     //game decisions
-    /*public void nextAction(PotOfMoney pot){ //need to implement bust etc
+    public void nextAction(PotOfMoney pot){ //need to implement functions such as hit etc
         if (hasSurrendered()){
             return;
         }
@@ -126,22 +171,18 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
             return;
         }
 
-        if (pot.getCurrentStake() == 0){
-            if (shouldOpen(pot)){
-                openBetting(pot);
-            } else{
-                surrender();
-            }
-        } else{
-            if (pot.getCurrentStake() > getStake()){
-                if (shouldSee(pot)){
-                    seeBet(pot);
-                } else {
-                    
-                }
-            }
+        if (hand.isBlackjack()){
+            System.out.println("\n> " + getName() + " says: I have blackjack!\n");
+            return;
         }
-    }*/
+
+        if (hand.isBust()) {
+            System.out.println("\n> " + getName() + " says: I have bust!\n");
+            return;
+        }
+
+        //requires logic for hit, stand, double TODO
+    }
 
 
     public String addCount(int count, String singular, String plural) {

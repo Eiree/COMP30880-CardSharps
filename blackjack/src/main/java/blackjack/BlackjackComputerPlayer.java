@@ -2,7 +2,7 @@ package blackjack;
 import poker.*;
 import java.util.Random;
 
-public class BlackjackComputerPlayer extends BlackjackPlayer{
+public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
     public static final int VARIABILITY = 50;
     private int riskTolerance = 0;
     private Random dice = new Random(System.currentTimeMillis());
@@ -36,8 +36,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{
                 if ((char) input[i] == 'y' || (char) input[i] == 'Y')
                     return true;
         } catch (Exception e) {
-        }
-        ;
+        };
 
         return false;
     }
@@ -54,7 +53,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{
                     addCount(pot.getCurrentStake() - getStake(), "chip", "chips"));
     }
 
-    public boolean shouldSplit(PotOfMoney pot) {
+    public boolean shouldSplit(PotOfMoney pot) { //TODO
         return false; // need to implement this someway
     }
 }

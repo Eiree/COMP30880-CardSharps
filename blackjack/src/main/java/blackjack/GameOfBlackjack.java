@@ -8,6 +8,8 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
     private BlackjackDeck deck;
     private int numPlayers;
 
+
+    //constructor
     public GameOfBlackjack(String[] names, int bank){
         numPlayers = names.length;
         players = new BlackjackPlayer[numPlayers];
@@ -21,6 +23,8 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
         deck = new BlackjackDeck();
     }
 
+
+    //getters
     public int getNumPlayers(){
         return numPlayers;
     }
@@ -43,14 +47,43 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
         return count;
     }
 
+
+    //init game
     public void play(){
         while (getNumSolventPlayers() > 1){
-            //RoundofBlackjack round = new RoundOfBlackjack(deck, players);
-            //round.play();
-            //check for another game
+            RoundOfBlackjack round = new RoundOfBlackjack(deck, players);
+            round.play();
+            try {
+                System.out.print("\n\nPlay another round? Press 'q' to terminate this game ... ");
+
+                byte[] input = new byte[100];
+
+                System.in.read(input);
+
+                for (int i = 0; i < input.length; i++)
+                    if ((char) input[i] == 'q' || (char) input[i] == 'Q')
+                        return;
+            } catch (Exception e) {
+            };
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //game structure
+        String[] names = { "Human", "Tom", "Dick", "Harry" };
+        System.out.println("\nWelcome to Blackjack ...\n\n");
+        System.out.print("\nWhat is your name?  ");
+
+        byte[] input = new byte[100];
+        try {
+            System.in.read(input);
+
+            names[0] = new String(input);
+        } catch (Exception e) {
+        };
+
+        int startingBank = 10;
+        System.out.println("\nLet's play BLACKJACK ...\n\n");
+        GameOfBlackjack game = new GameOfBlackjack(names, startingBank);
+        game.play();
     }
 }
