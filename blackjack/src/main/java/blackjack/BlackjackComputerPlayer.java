@@ -2,7 +2,7 @@ package blackjack;
 import poker.*;
 import java.util.Random;
 
-public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
+public abstract class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
     public static final int VARIABILITY = 50;
     private int riskTolerance = 0;
     private Random dice = new Random(System.currentTimeMillis());
