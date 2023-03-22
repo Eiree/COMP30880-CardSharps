@@ -1,10 +1,10 @@
 
-package com.cardsharps;
+package poker;
 
 // This package provides classes necessary for implementing a game system for playing poker
 
 
-public class High extends PokerHand {
+public class ThreeOfAKind extends PokerHand {
 	
 	//--------------------------------------------------------------------//
 	//--------------------------------------------------------------------//
@@ -12,7 +12,7 @@ public class High extends PokerHand {
 	//--------------------------------------------------------------------//
 	//--------------------------------------------------------------------//
 	
-	public High(Card[] hand, DeckOfCards deck) {
+	public ThreeOfAKind(Card[] hand, DeckOfCards deck) {
 		super(hand, deck);
 	}
 
@@ -24,7 +24,7 @@ public class High extends PokerHand {
 	//--------------------------------------------------------------------//
 	
 	public int getRiskWorthiness() {
-		return 100 - PokerHand.HIGHCARD_RISK + getValue(); 
+		return 100 - PokerHand.THREES_RISK; 
 	}
 
 	//--------------------------------------------------------------------//
@@ -34,11 +34,15 @@ public class High extends PokerHand {
 	//--------------------------------------------------------------------//
 	
 	public int getValue() {
-		if (getCard(4).getRank() == 1) // an ace
-			return getCard(4).getValue();
+		if (getCard(0).getRank() == getCard(2).getRank())
+			return PokerHand.THREES_VALUE + getCard(0).getValue()*10 + getCard(3).getValue();
 		else
-			return getCard(0).getValue();
+		if (getCard(1).getRank() == getCard(3).getRank())
+			return PokerHand.THREES_VALUE + getCard(1).getValue()*10 + getCard(0).getValue();
+		else
+			return PokerHand.THREES_VALUE + getCard(2).getValue()*10 + getCard(0).getValue();			
 	}
+	
 	
 	//--------------------------------------------------------------------//
 	//--------------------------------------------------------------------//
@@ -47,12 +51,17 @@ public class High extends PokerHand {
 	//--------------------------------------------------------------------//
 	
 	public PokerHand discard() {
-		if (getCard(4).getRank() == 1)
-			return discard(1,2,3);
+		if (getCard(0).getRank() == getCard(2).getRank())
+			return discard(3, 4);
 		else
-			return discard(2,3,4);
+		if (getCard(1).getRank() == getCard(3).getRank())
+			return discard(0, 4);
+		else
+			return discard(0, 1);			
 	}
 
+	
+	
 	//--------------------------------------------------------------------//
 	//--------------------------------------------------------------------//
 	// Display
@@ -60,10 +69,15 @@ public class High extends PokerHand {
 	//--------------------------------------------------------------------//
 	
 	public String toString() {
-		if (getCard(4).getRank() == 1)
-			return "Ace High: " + super.toString();
+		if (getCard(0).getRank() == getCard(2).getRank())
+			return "Three " + getCard(0).getName() + "s" + super.toString();
 		else
-			return getCard(0).getName() + " High: " + super.toString();
+		if (getCard(1).getRank() == getCard(3).getRank())
+			return "Three " + getCard(1).getName() + "s" + super.toString();
+		else
+			return "Three " + getCard(2).getName() + "s" + super.toString();	
 	}
+
 	
 }
+

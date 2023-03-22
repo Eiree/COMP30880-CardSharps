@@ -1,5 +1,5 @@
 
-package com.cardsharps;
+package poker;
 
 // This package provides classes necessary for implementing a game system for playing poker
 
