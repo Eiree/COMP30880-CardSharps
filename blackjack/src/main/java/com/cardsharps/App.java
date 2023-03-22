@@ -1,13 +1,12 @@
-package com.cardsharps;
+//package com.cardsharps;
 
 /**
  * Hello world!
  *
- */
 public class App 
 {
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
     }
-}
+}*/
