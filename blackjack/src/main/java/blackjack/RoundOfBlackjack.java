@@ -1,6 +1,24 @@
 package blackjack;
 import poker.*;
 
+
+// 
+// Dealing hands changed
+// original stake
+// open round
+// remove pot
+// play method
+// check hands bust or stand and play with next player
+// dealer functionality (only hit < 17)
+// win checking for each hand
+// bankrupcy check
+// no best player
+// multiple winners
+// working for the hole card (index 1) of the dealer
+// 
+// Displaying the information of the game
+// 
+// 
 public class RoundOfBlackjack {
     public static int DELAY_BETWEEN_ACTIONS = 1000; //ms
     private BlackjackPlayer[] players;
@@ -103,7 +121,7 @@ public class RoundOfBlackjack {
             stake = pot.getCurrentStake();
             for (int i = 0; i < getNumPlayers(); i++){
                 currentPlayer = getPlayer(i);
-                if (currentPlayer == null || currentPlayer.hasSurrendered()){
+                if (currentPlayer == null || currentPlayer.hasSurrendered()){ // if(player[i].getHand[j] !bust && player.getHand[j] !stood)
                     continue;
                 }
 

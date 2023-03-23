@@ -3,7 +3,18 @@ import poker.*;
 
 public class GameOfBlackjack { //reference Gameofpoker.java in poker
 
-    //logic etc here
+    //TODO
+    // DEALER HANDED HERE
+    // 
+    // Handle Bankrupcy
+    // Initialize players
+    // Initialize deck and pass it to the round
+    // counter for num of players
+    // input for name
+    // contructor to take names and bank(??)
+    // getters and setters
+    // play method handle rounds
+    // check for termination
 
     public static void main(String[] args) {
         /*
