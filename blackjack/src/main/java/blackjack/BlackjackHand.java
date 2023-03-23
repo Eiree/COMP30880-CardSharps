@@ -9,8 +9,8 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
     
     //static variables for cards etc
     public static final int NUMCARDS = 2; //initally gets 2 card to then hit on (the dealer gets 1 card initally)
-    public static final int DEFAULT_RISK = 20; //default risk to determine play
-
+    
+    
     private Card[] hand;
     public BlackjackDeck deck;
 
@@ -19,21 +19,19 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         this.deck = deck;
     }
 
-    public BlackjackHand(BlackjackDeck deck){
-        this.deck = deck;
+    public BlackjackHand(BlackjackDeck blackjackDeck){
+        this.deck = blackjackDeck;
         hand = new Card[NUMCARDS];
 
         //hand logic
         for (int i = 0; i < NUMCARDS; i++){
-            setCard(i, deck.dealNext());
+            setCard(i, blackjackDeck.dealNext());
         }
 
         //unsure if we need to sort hand or not ------
     }
 
-    public int getRiskWorthiness(){
-        return DEFAULT_RISK;
-    }
+   
 
     public String toString(){ //display hand
         String desc = "";
@@ -94,6 +92,11 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         if (num >= 0 && num < NUMCARDS){
             hand[num] = card;
         }
+    }
+
+    //TODO CHANGE??
+    public void addCard(Card card){
+        hand[hand.length] = card;
     }
 
     //hand classifer
