@@ -2,6 +2,20 @@ package blackjack;
 import poker.*;
 import java.util.Random;
 
+
+
+// TODO
+// 
+// Lookup table
+// Should method ->checks lookup table
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+
 public abstract class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
     
     

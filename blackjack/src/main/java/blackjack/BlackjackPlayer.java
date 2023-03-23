@@ -6,12 +6,14 @@ import poker.*;
 
 abstract class BlackjackPlayer { //reference player.java, humanplayer.java and computerplayer.java
     
+    
     private int bank = 0; //total money player has left (without stake)
     
     private BlackjackHand[] hand = new BlackjackHand[4]; //hands dealt to player
     private int[] stake = new int[4] ; //stakes of hands 
     private boolean[] stand = new boolean[4]; //flag for each hand
     private boolean[] bust = new boolean[4]; //flag for bust
+    private boolean[] won = new boolean[4]; //flag for winning hand
 
     private int numOfHands = 1; 
 
@@ -82,9 +84,9 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return surrendered;
     }
 
-    /*public boolean isWon(){ //condition for win.
-        return win;
-    }*/
+    public boolean isWon(int handIndex){ //condition for win.
+        return won[handIndex];
+    }
 
     
     //setters
@@ -98,23 +100,18 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         hand[0] = deck.dealHand();
         stake[0] = originalStake;
     }
+    //TODO
 
-    //CHANGE???
-    public void takePot(PotOfMoney pot){
-        System.out.println("\n> " + getName() + "says: I WIN " + addCount(pot.getTotal(), "chip", "chips") + "!\n");
-        bank += pot.takePot();
-    }
-
-    // player actions
-    // WHAT DOES SURRENDER DO
-    public void surrender(int handIndex){
-        if (!surrendered){
-            System.out.println("\n> " + getName() + " says: I surrender!\n");
-            bank += (stake[handIndex] / 2);
-            stake[handIndex] = 0; //shouldnt need to reset as reset() already init stake = 0
-            surrendered = true;
-        }
-    }
+    // // player actions
+    // // WHAT DOES SURRENDER DO
+    // public void surrender(int handIndex){
+    //     if (!surrendered){
+    //         System.out.println("\n> " + getName() + " says: I surrender!\n");
+    //         bank += (stake[handIndex] / 2);
+    //         stake[handIndex] = 0; //shouldnt need to reset as reset() already init stake = 0
+    //         surrendered = true;
+    //     }
+    // }
 
 
     public void hit(BlackjackDeck deck, int handIndex){ //TODO
@@ -180,23 +177,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         
         System.out.println("\n> " + getName() + " says: I open with one chip!\n");
     }
-    //TODO
-    // public void seeBet(PotOfMoney pot){
-    //     int needed = pot.getCurrentStake() - getStake();
-    //     if (needed == 0 || needed > getBank()){
-    //         return;
-    //     }
-    //     stake += needed;
-    //     bank -= needed;
-
-    //     pot.addToPot(needed);
-    //     System.out.println("\n> " + getName() + " says: I see that " + addCount(needed, "chip", "chips") + "!\n");
-    // }
-
-    //Key decisions
-    // abstract boolean shouldOpen(PotOfMoney pot);
-    // abstract boolean shouldSee(PotOfMoney pot);
-
+   
     abstract boolean shouldSplit(BlackjackDeck deck, int handIndex);
     abstract boolean shouldHit(BlackjackDeck deck, int handIndex);
     abstract boolean shouldDouble(BlackjackDeck deck, int handIndex);
@@ -209,19 +190,24 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
         //CHANGE SURRENDER
         //TODO
-        if (isBankrupt()){
-            System.out.println("\n> " + getName() + " says: I'm out!\n");
-            surrender(handIndex);
-            return;
-        }
+        // if (isBankrupt()){
+        //     System.out.println("\n> " + getName() + " says: I'm out!\n");
+        //     surrender(handIndex);
+        //     return;
+        // }
 
         if (hand[handIndex].isBlackjack()){
             System.out.println("\n> " + getName() + " says: I have blackjack!\n");
+            
+            //CHECKING FOR BLACKJACK
+            won[handIndex] = true;
+            
             return;
         }
 
         if (hand[handIndex].isBust()) {
             System.out.println("\n> " + getName() + " says: I have bust!\n");
+            bust[handIndex] = true;
             return;
         }
         //TODO see functioning
@@ -236,7 +222,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
                 split(deck, handIndex);
         }
 
-
     }
 
 
@@ -248,8 +233,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     }
 
     public static void main(String[] args) {
-        
-        
+       
 
     }
 }
