@@ -26,43 +26,42 @@ public abstract class BlackjackHumanPlayer extends BlackjackPlayer { //error cau
         return false;
     }
 
-    public boolean shouldOpen(PotOfMoney pot) {
-        return true;
+    public boolean shouldDouble(BlackjackDeck deck, int handIndex) { // TODO---------------
+        if(getBank() >= getStake(handIndex)*2){
+            if(askQuestion("Do you want to Double the Stakes and Get a Card? Current Stakes: " + getStake(handIndex)))
+                doubleDown(deck, handIndex);
+                return true;
+        }
+        else{
+            return false;
+        }
     }
+    public boolean shouldSplit(BlackjackDeck deck, int handIndex){
+        if(getBank() >= getStake(handIndex)*2)
+            return askQuestion("Do you want to Split the Hands in 2? Current Stakes: " + getStake(handIndex));
 
-    public boolean shouldSee(PotOfMoney pot) {
-        if (getStake() == 0)
-            return true;
         else
-            return askQuestion("Do you want to see the bet of " +
-                    addCount(pot.getCurrentStake() - getStake(), "chip", "chips"));
+            return false;
     }
 
-    public boolean shouldDouble(PotOfMoney pot) { // TODO---------------
-       return false;
+    public boolean shouldHit(BlackjackDeck deck, int handIndex) { // TODO---------------
+         if(askQuestion("Do you want to Hit?")){
+            hit(deck, handIndex);
+            return true;
+         }
+         else{
+            return false;
+         }
     }
 
-    public boolean shouldHit(PotOfMoney pot) { // TODO---------------
-        /* total value of all cards
-        if (total <= 11) {
-            return true; // always hit if hand value is less than or equal to 11
-        } else if (total == 12) {
-            int dealerCardValue = pot.getDealerCardValue(); //require to implement dealer cards and their values
-            if (dealerCardValue >= 4 && dealerCardValue <= 6) {
-                return false; // stand if dealer has a 4, 5, or 6
-            } else {
-                return true; // hit otherwise
-            }
-        } else if (total >= 13 && total <= 16) {
-            int dealerCardValue = pot.getDealerCardValue();
-            if (dealerCardValue >= 2 && dealerCardValue <= 6) {
-                return false; // stand if dealer has a 2, 3, 4, 5, or 6
-            } else {
-                return true; // hit otherwise
-            }
-        } else {
-            return false; // stand if hand value is 17 or greater
-        }*/
-        return false;
+    public boolean shouldStand(BlackjackDeck deck, int handIndex){
+        if(askQuestion("Do you want to Stand?")){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
+
+
 }

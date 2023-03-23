@@ -22,9 +22,9 @@ public class BlackjackDeck {
             deck[next++] = new NumberCard("Eight", suits[i], 8);
             deck[next++] = new NumberCard("Nine", suits[i], 9);
             deck[next++] = new NumberCard("Ten", suits[i], 10);
-            deck[next++] = new FaceCard("Jack", suits[i], 10);
-            deck[next++] = new FaceCard("Queen", suits[i], 10);
-            deck[next++] = new FaceCard("King", suits[i], 10);
+            deck[next++] = new FaceCard("Jack", suits[i], 11);
+            deck[next++] = new FaceCard("Queen", suits[i], 12);
+            deck[next++] = new FaceCard("King", suits[i], 13);
         }
 
         reset();
