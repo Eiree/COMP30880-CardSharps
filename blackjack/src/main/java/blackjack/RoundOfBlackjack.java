@@ -188,15 +188,21 @@ public class RoundOfBlackjack {
             dealer.getHand(0).toString();
             if (dealer.getHand(0).getHandValue() > 21){
                 dealer.isBust(0);
+                dealer.nextAction(deck, 0, null);
             }
         }
-
+        int dealerScore = dealer.getHand(0).getHandValue();
         //7) Winners calculated & winnings added to bank
         for (int i=0; i<numPlayers; i++){
             for (int j=0; j<players[i].getNumOfHands(); j++){
-                if(players[i].isWon(j)){
+                if(players[i].isWon(j)){    //isBlackjack
+                    players[i].addBank(2*players[i].getStake(j));
+                    System.out.println("Congratulations " + players[i].getName() + " you won you got Blackjack " + 2*players[i].getStake(j));
+                }
+                else if(dealerScore < players[0].getHand(j).getHandValue()){
                     players[i].addBank(2*players[i].getStake(j));
                     System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getStake(j));
+
                 }
                 else if(players[i].isDraw(j)){  //draw score dealer=player & not blackjack
                     players[i].addBank(players[i].getStake(j));

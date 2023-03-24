@@ -15,7 +15,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     private boolean[] bust = new boolean[4]; //flag for bust
     private boolean[] won = new boolean[4]; //flag for winning hand
     private boolean[] draw = new boolean[4]; //flag for draw
-
+    
     private int numOfHands = 1; 
 
     //DO WE NEED SURRENDER??
