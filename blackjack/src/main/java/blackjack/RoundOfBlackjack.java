@@ -140,11 +140,8 @@ public class RoundOfBlackjack {
         }
 
         //3)Dealer gets two cards
-<<<<<<< HEAD
+
         dealer.dealTo(deck, 0);
-=======
-        dealer.dealTo(deck, dealer.getStake(0));
->>>>>>> 7c26f474f6a0bad1ba24c3d6244bf9fe892cc701
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
         //4)a)Human player while not bust decides move

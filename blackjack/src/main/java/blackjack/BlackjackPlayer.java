@@ -127,7 +127,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         //implement hit functionality
         System.out.println("\n> " + getName() + " says: Hit!");
         hand[handIndex].addCard(deck.dealNext());
-        
+        System.out.println(hand[handIndex]);
     }
 
     public void stand(int handIndex){ //TODO
@@ -175,16 +175,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return true;
     }
 
-    /*public void openBetting(int handIndex){ //Add player input for amount of the bet
-        if (bank == 0){
-            return;
-        }
-
-        stake[handIndex]++;    // Player Input
-        bank--;     //Plyaer INput
-        
-        System.out.println("\n> " + getName() + " says: I open with one chip!\n");
-    }*/
     public void openBetting(){ //Add player input for amount of the bet
         if (bank == 0){
             return;

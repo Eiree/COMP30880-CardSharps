@@ -69,32 +69,4 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     public boolean shouldSplit(PotOfMoney pot) { //TODO
         return false; // need to implement this someway
     }
-
-
-
-    boolean shouldSplit(BlackjackDeck deck, int handIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'shouldSplit'");
-    }
-
-
-
-    boolean shouldHit(BlackjackDeck deck, int handIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'shouldHit'");
-    }
-
-
-
-    boolean shouldDouble(BlackjackDeck deck, int handIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'shouldDouble'");
-    }
-
-
-
-    boolean shouldStand(BlackjackDeck deck, int handIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'shouldStand'");
-    }
 }
