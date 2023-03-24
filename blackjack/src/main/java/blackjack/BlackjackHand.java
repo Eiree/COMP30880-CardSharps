@@ -8,8 +8,8 @@ import poker.*;
 public class BlackjackHand { //reference pokerhand.java in poker, references both dealer and player
     
     //static variables for cards etc
-    public static final int NUMCARDS = 2; //initally gets 2 card to then hit on (the dealer gets 1 card initally)
-    
+    private int numCards = 2; //initally gets 2 card to then hit on (the dealer gets 1 card initally)
+    public static final int MAXCARDS = 11;
     
     private Card[] hand;
     public BlackjackDeck deck;
@@ -21,10 +21,10 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
 
     public BlackjackHand(BlackjackDeck blackjackDeck){
         this.deck = blackjackDeck;
-        hand = new Card[NUMCARDS];
+        hand = new Card[MAXCARDS];
 
         //hand logic
-        for (int i = 0; i < NUMCARDS; i++){
+        for (int i = 0; i < numCards; i++){
             setCard(i, blackjackDeck.dealNext());
         }
 
@@ -35,7 +35,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
 
     public String toString(){ //display hand
         String desc = "";
-        for (int i = 0; i < NUMCARDS; i++){
+        for (int i = 0; i < numCards; i++){
             desc = desc + "\n       " + i + ":  " + getCard(i).toString();
         }
         return desc + "\n";
@@ -44,7 +44,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
 
     //getters
     public Card getCard(int num){
-        if (num >= 0 && num < NUMCARDS){
+        if (num >= 0 && num < numCards){
             return hand[num];
         } else {
             return null;
@@ -89,14 +89,14 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
 
     //setters
     public void setCard(int num, Card card){
-        if (num >= 0 && num < NUMCARDS){
+        if (num >= 0 && num < numCards){
             hand[num] = card;
         }
     }
 
     //TODO CHANGE??
     public void addCard(Card card){
-        hand[hand.length] = card;
+        hand[numCards] = card;
     }
 
     //hand classifer

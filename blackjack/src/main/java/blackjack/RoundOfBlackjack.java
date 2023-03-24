@@ -35,6 +35,8 @@ public class RoundOfBlackjack {
         numPlayers = players.length;
         System.out.println("\n\nNew round:\n\n");
         deal();
+        dealer = new BlackjackHumanPlayer("dealer",1000);
+
 
         //conditions to deal
         //openRound();
@@ -131,12 +133,12 @@ public class RoundOfBlackjack {
                 continue;
             }
             player.dealTo(deck, player.getStake(0));
-            System.out.println(player.getName() + " has a " + player.getCard(0,0).getName()
-                    + " & a " + player.getCard(0,1).getName());
+            System.out.println(player.getName() + " has a " + player.getCard(0,0).toString()
+                    + " & a " + player.getCard(0,1).toString());
         }
 
         //3)Dealer gets two cards
-        dealer.dealTo(deck, dealer.getStake(0));
+        dealer.dealTo(deck,0); //dealer has no steak
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
         //4)a)Human player while not bust decides move
