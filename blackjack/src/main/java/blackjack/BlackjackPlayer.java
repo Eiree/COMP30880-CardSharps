@@ -227,7 +227,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
             System.out.println("HAS HIT");}
             else if(shouldStand(deck, handIndex, dealerCard))
                 stand(handIndex);
-            else if(shouldDouble(deck, handIndex, dealerCard))
+            else if(shouldDouble(deck, handIndex,dealerCard))
                 doubleDown(deck, handIndex);
             else if(shouldSplit(deck, handIndex, dealerCard))
                 split(deck, handIndex);

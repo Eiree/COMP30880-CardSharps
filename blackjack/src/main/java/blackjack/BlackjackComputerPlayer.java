@@ -6,8 +6,8 @@ import java.util.Random;
 
 // TODO
 // 
-// Deal with cases where the value of player hand >= 21
-//
+// Lookup table
+// Should method ->checks lookup table
 // 
 // 
 // 
@@ -17,17 +17,14 @@ import java.util.Random;
 // 
 
 public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
-    private static char ERROR_MOVE = 'E';
-    private static char STAND_MOVE = 'S';
-    private static char DOUBLE_MOVE = 'D';
-    private static char HIT_MOVE = 'H';
-    char[][] DECISION_MATRIX;
+    
+    char[][] decisionMatrix;
 
     //constructor
     public BlackjackComputerPlayer(String name, int money){
         super(name, money);
 
-        DECISION_MATRIX = new char[][]{
+        decisionMatrix = new char[][]{
                 /*
                 *   E = Error
                 *   S = Stand
@@ -60,48 +57,27 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     //always false computer never splits
-    boolean shouldSplit(BlackjackDeck deck, int handIndex, Card dealerCard) {
+    boolean shouldSplit(BlackjackDeck deck, int handIndex) {
         return false;
     }
 
     //hit, double, stand according to table
-    boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        System.out.println("Hit");
-        System.out.println("Dealer card: " + dealerCard.getValue());
-        System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
-        if(HIT_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
-            System.out.println("MOVE FOUND");
-            return true;
-        }
-        else {
-            System.out.println("ERROR");
-            return false;
-        }
+    boolean shouldHit(BlackjackDeck deck, int handIndex) {
+        return true;
     }
 
-    boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        System.out.println("Double");
-        System.out.println("Dealer card: " + dealerCard.getValue());
-        System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
-        if(DOUBLE_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    boolean shouldDouble(BlackjackDeck deck, int handIndex) {
+        return false;
     }
 
-    boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        System.out.println("Stand");
-        System.out.println("Dealer card: " + dealerCard.getValue());
-        System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
-        if(STAND_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    boolean shouldStand(BlackjackDeck deck, int handIndex) {
+        return false;
     }
+
+    public boolean shouldSplit(PotOfMoney pot) { // TODO
+        return false; // need to implement this someway
+    }
+
 
     //todo (verify) DECISIONS
     public boolean askQuestion(String question) {
