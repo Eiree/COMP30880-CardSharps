@@ -47,11 +47,8 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
 
         try {
             System.out.print("\n\nPlay another round? Press 'q' to terminate this game ... ");
-
             byte[] input = new byte[100];
-
             System.in.read(input);
-
             for (int i = 0; i < input.length; i++)
                 if ((char) input[i] == 'q' || (char) input[i] == 'Q')
                     return;
@@ -64,20 +61,17 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
     public static void main(String[] args) {
         
          String[] names = { "Human", "Tom", "Dick", "Harry"}; //define names
-         System.out.println("\nWelcome to the Blackjack ...\n\n");
-         System.out.print("\nWhat is your name?  ");
+         System.out.println("\nWelcome to the Blackjack ...\n");
+         System.out.print("What is your name?: ");
          byte[] input = new byte[100]; //get user input for name
          try {
          System.in.read(input);
          names[0] = new String(input);
           } catch (Exception e) {
           };
-          
           int startingBank = 10;
-          System.out.println("\nLet's play Blackjack ...\n\n");
-          
+          System.out.println("Let's play Blackjack ...\n");
           GameOfBlackjack game = new GameOfBlackjack(names, startingBank);
           game.play();
-        // init game logic
     }
 }

@@ -23,13 +23,9 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
     public BlackjackHand(BlackjackDeck blackjackDeck){
         this.deck = blackjackDeck;
         hand = new Card[MAXCARDS]; //11 is max possible cards
-
-        //hand logic
         for (int i = 0; i < numCards; i++){
             setCard(i, blackjackDeck.dealNext());
         }
-
-        //unsure if we need to sort hand or not ------
     }
 
    
@@ -37,7 +33,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
     public String toString(){ //display hand
         String desc = "";
         for (int i = 0; i < numCards; i++){
-            desc = desc + "\n       " + i + ":  " + getCard(i).toString();
+            desc = desc + "\n  " + i + ":  " + getCard(i).toString();
         }
         return desc + "\n";
     }
@@ -69,12 +65,10 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         int numAces = 0;
 
         for (int i = 0; i < getNumCards(); i++){
-            int cardValue = getCard(i).getValue();
+            int cardValue = getCard(i).getRank();
             if (cardValue == 1){ //ace card
                 numAces++;
                 handValue += 11; //assuming that it is currently holding the value of 11
-            } else if (cardValue >= 10 && cardValue <= 13){ //face card (king, queen, jack)
-                handValue += 10;
             } else {
                 handValue += cardValue;
             }
@@ -95,7 +89,6 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         }
     }
 
-    //TODO CHANGE??
     public void addCard(Card card){
         hand[numCards++] = card;
     }
