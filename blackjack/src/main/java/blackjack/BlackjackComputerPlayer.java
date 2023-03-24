@@ -67,7 +67,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
 
     //hit, double, stand according to table
     boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        if(HIT_MOVE == DECISION_MATRIX[dealerCard.getValue()][this.getHand(handIndex).getHandValue()]) {
+        if(HIT_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
             return true;
         }
         else {
@@ -76,7 +76,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        if(DOUBLE_MOVE == DECISION_MATRIX[dealerCard.getValue()][this.getHand(handIndex).getHandValue()]) {
+        if(DOUBLE_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
             return true;
         }
         else {
@@ -85,7 +85,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        if(STAND_MOVE == DECISION_MATRIX[dealerCard.getValue()][this.getHand(handIndex).getHandValue()]) {
+        if(STAND_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
             return true;
         }
         else {
@@ -93,9 +93,6 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
         }
     }
 
-    public boolean shouldSplit(PotOfMoney pot, Card dealerCard) { // TODO
-        return false; // need to implement this someway
-    }
 
 
     //todo (verify) DECISIONS
