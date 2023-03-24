@@ -70,7 +70,9 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     public String getName(){
         return name;
     }
-
+    public void setBust(int handIndex){
+        bust[handIndex] = true;
+    }
     public boolean isBankrupt(){
         return bank == 0;
     }
@@ -221,10 +223,8 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
         //TODO see functioning
         else{
-            if(shouldHit(deck, handIndex, dealerCard)){
-                System.out.println("SHOULD HIT");
-                System.out.println(hit(deck, handIndex));
-            System.out.println("HAS HIT");}
+            if(shouldHit(deck, handIndex, dealerCard))
+                hit(deck, handIndex);
             else if(shouldStand(deck, handIndex, dealerCard))
                 stand(handIndex);
             else if(shouldDouble(deck, handIndex,dealerCard))
@@ -235,13 +235,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return;
     }
 
-
-    public String addCount(int count, String singular, String plural) {
-        if (count == 1 || count == -1)
-            return count + " " + singular;
-        else
-            return count + " " + plural;
-    }
 
     public static void main(String[] args) {
        
