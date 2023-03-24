@@ -188,6 +188,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
 
         //stake[0]++;    // Player Input
+        hand[0].setStake(1);
 
         bank--;     //Player Input
 

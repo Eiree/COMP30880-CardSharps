@@ -18,13 +18,17 @@ import java.util.Random;
 
 public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
     
-    char[][] decisionMatrix;
+    private static char ERROR_MOVE = 'E';
+    private static char STAND_MOVE = 'S';
+    private static char DOUBLE_MOVE = 'D';
+    private static char HIT_MOVE = 'H';
+    char[][] DECISION_MATRIX;
 
     //constructor
     public BlackjackComputerPlayer(String name, int money){
         super(name, money);
 
-        decisionMatrix = new char[][]{
+        DECISION_MATRIX = new char[][]{
                 /*
                 *   E = Error
                 *   S = Stand
@@ -63,20 +67,32 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
 
     //hit, double, stand according to table
     boolean shouldHit(BlackjackDeck deck, BlackjackHand hand, Card dealerCard) {
-        return true;
+        if(HIT_MOVE == DECISION_MATRIX[hand.getHandValue()][dealerCard.getValue()]) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     boolean shouldDouble(BlackjackDeck deck, BlackjackHand hand, Card dealerCard) {
-        return false;
+        if(DOUBLE_MOVE == DECISION_MATRIX[hand.getHandValue()][dealerCard.getValue()]) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     boolean shouldStand(BlackjackDeck deck, BlackjackHand hand, Card dealerCard) {
-        return false;
+        if(STAND_MOVE == DECISION_MATRIX[hand.getHandValue()][dealerCard.getValue()]) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public boolean shouldSplit(PotOfMoney pot, Card dealerCard) { // TODO
-        return false; // need to implement this someway
-    }
 
 
     //todo (verify) DECISIONS
