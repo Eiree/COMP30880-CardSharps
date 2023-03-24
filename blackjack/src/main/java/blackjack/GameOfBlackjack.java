@@ -63,7 +63,7 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
 
     public static void main(String[] args) {
         
-         String[] names = { "Human", "Tom", "Dick", "Harry" }; //define names
+         String[] names = { "Human", "Tom", "Dick", "Harry"}; //define names
          System.out.println("\nWelcome to the Blackjack ...\n\n");
          System.out.print("\nWhat is your name?  ");
          byte[] input = new byte[100]; //get user input for name

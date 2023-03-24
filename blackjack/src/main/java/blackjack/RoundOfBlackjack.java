@@ -168,11 +168,13 @@ public class RoundOfBlackjack {
         }*/
 
         int i = 0;
-        while (!allPlayersDone()) {
-            while (!players[i].isBust(i) || !players[i].isStand(i)){
-                players[i].nextAction(deck, i);
-                if (players[i].isBust(i) || players[i].isStand(i)){
-                    i++;
+        while (!allPlayersDone() && i < numPlayers) {
+            while (!players[i].isBust(0) || !players[i].isStand(0)){
+                players[i].nextAction(deck, 0);
+                if (players[i].isStand(0) || players[i].isBust(0)){
+                    if (i < numPlayers-1){
+                        i++;
+                    }
                 }
             }
         }
