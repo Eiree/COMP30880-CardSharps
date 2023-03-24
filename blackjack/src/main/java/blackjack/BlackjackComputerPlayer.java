@@ -18,13 +18,17 @@ import java.util.Random;
 
 public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by abstract methods such as shouldSplit etc
     
-    char[][] decisionMatrix;
+    private static char ERROR_MOVE = 'E';
+    private static char STAND_MOVE = 'S';
+    private static char DOUBLE_MOVE = 'D';
+    private static char HIT_MOVE = 'H';
+    char[][] DECISION_MATRIX;
 
     //constructor
     public BlackjackComputerPlayer(String name, int money){
         super(name, money);
 
-        decisionMatrix = new char[][]{
+        DECISION_MATRIX = new char[][]{
                 /*
                 *   E = Error
                 *   S = Stand
@@ -53,30 +57,44 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
                 {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 18
                 {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 19
                 {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 20
+                {'S','S','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 21
+
         };
     }
 
     //always false computer never splits
-    boolean shouldSplit(BlackjackDeck deck, int handIndex) {
+    boolean shouldSplit(BlackjackDeck deck, int handIndex, Card dealerCard) {
         return false;
     }
 
     //hit, double, stand according to table
-    boolean shouldHit(BlackjackDeck deck, int handIndex) {
-        return true;
+    boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard) {
+        if(HIT_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    boolean shouldDouble(BlackjackDeck deck, int handIndex) {
-        return false;
+    boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard) {
+        if(DOUBLE_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    boolean shouldStand(BlackjackDeck deck, int handIndex) {
-        return false;
+    boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard) {
+        if(STAND_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    boolean shouldSplit(PotOfMoney pot) { // TODO
-        return false; // need to implement this someway
-    }
 
 
     //todo (verify) DECISIONS

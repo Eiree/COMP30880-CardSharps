@@ -155,21 +155,27 @@ public class RoundOfBlackjack {
         dealer.dealTo(deck, 0);
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
-        int i = 0;
-        while (!allPlayersDone() && i < numPlayers) {
-            while (!players[i].isBust(0) || !players[i].isStand(0)){
-                players[i].nextAction(deck, 0, dealer.getCard(0,0));
-                if (players[i].isStand(0) || players[i].isBust(0)){
-                    if (i < numPlayers-1){
-                        i++;
-                    } else {
-                        break;
-                    }
-                }
-                if (players[i].isBust(0) || players[i].isStand(0)){
-                    i++;
-                }
+        //4)a)Human player while not bust decides move
+        /*while(!players[0].isBust()) {
+            char move = players[0].askMove();
+            if(move == 'h' || move == 'H'){
+                players[0].hit(deck);
+            } else if (move == 's' || move == 'S') {
+                players[0].stand();
+            } else if (move == 'd' || move == 'D') {
+                players[0].doubleDown(deck,);
+            } else if (move == 'p' || move == 'P') {
+                players[0].split();
             }
+        }*/
+        int count =0;
+        while(count<numPlayers){
+
+            while(!players[count].isBust(0) && !players[count].isStand(0)){
+                players[count].nextAction(deck, 0, dealer.getCard(0, 0));
+            }
+            System.out.println(players[count].getName() + " : " + players[count].getHand(0).getHandValue());
+            count++;
         }
         
 
@@ -179,7 +185,7 @@ public class RoundOfBlackjack {
         //6) Dealer must hit until >= 17
         while (dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)) {
             dealer.hit(deck, 0);
-            System.out.println("Dealer hits and draws a " + dealer.getHand(0).getCard(0,0).getName()); //check getCard(0,0) unsure if this right card to display.
+            System.out.println("Dealer hits and draws a " + dealer.getHand(0).getCard(0).getName()); //check getCard(0,0) unsure if this right card to display.
             if (dealer.isBust(0)) {
                 dealer.setBust(0);
                 System.out.println("Dealer is bust!");
@@ -188,14 +194,15 @@ public class RoundOfBlackjack {
 
         //7) Winners calculated & winnings added to bank
         int dealerScore = dealer.getHand(0).getHandValue();
+        System.out.println(dealerScore);
         for (int x=0; x<numPlayers; x++){
-            for (int j=0; j<player[i].getNumOfHands(); j++){
+            for (int j=0; j<players[x].getNumOfHands(); j++){
                 if(players[x].isWon(j)){
                     players[x].addBank(2*players[x].getStake(j));
                     System.out.println("Congratulations " + players[x].getName() + " you won " + 2*players[x].getStake(j));
                 } else if(dealerScore < players[0].getHand(j).getHandValue() || dealer.isBust(0)){
-                    players[i].addBank(2*players[i].getStake(j));
-                    System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getStake(j));
+                    players[x].addBank(2*players[x].getStake(j));
+                    System.out.println("Congratulations " + players[x].getName() + " you won " + 2*players[x].getStake(j));
                 } else if(players[x].isDraw(j)){  //draw score dealer=player & not blackjack
                     players[x].addBank(players[x].getStake(j));
                     System.out.println("It's a draw " + players[x].getName() + " you get your stake of " + players[x].getStake(j) + "back");
