@@ -95,6 +95,11 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return draw[handIndex];
     }
 
+    public void setBust(int handIndex){
+        bust[handIndex] = true;
+    }
+
+
     
     //setters
     public void dealTo(BlackjackDeck deck, int originalStake){

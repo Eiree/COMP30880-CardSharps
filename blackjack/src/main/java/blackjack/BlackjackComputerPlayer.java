@@ -74,7 +74,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
         return false;
     }
 
-    public boolean shouldSplit(PotOfMoney pot) { // TODO
+    boolean shouldSplit(PotOfMoney pot) { // TODO
         return false; // need to implement this someway
     }
 

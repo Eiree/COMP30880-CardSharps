@@ -1,4 +1,6 @@
 package blackjack;
+import javax.xml.transform.Source;
+
 import poker.*;
 
 
@@ -65,6 +67,7 @@ public class RoundOfBlackjack {
         }
         return count;
     }
+
 
     public void removePlayer(int num){
         if (num >= 0 && num < numPlayers){
@@ -149,23 +152,8 @@ public class RoundOfBlackjack {
         }
 
         //3)Dealer gets two cards
-
         dealer.dealTo(deck, 0);
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
-
-        //4)a)Human player while not bust decides move
-        /*while(!players[0].isBust()) {
-            char move = players[0].askMove();
-            if(move == 'h' || move == 'H'){
-                players[0].hit(deck);
-            } else if (move == 's' || move == 'S') {
-                players[0].stand();
-            } else if (move == 'd' || move == 'D') {
-                players[0].doubleDown(deck,);
-            } else if (move == 'p' || move == 'P') {
-                players[0].split();
-            }
-        }*/
 
         int i = 0;
         while (!allPlayersDone() && i < numPlayers) {
@@ -174,7 +162,12 @@ public class RoundOfBlackjack {
                 if (players[i].isStand(0) || players[i].isBust(0)){
                     if (i < numPlayers-1){
                         i++;
+                    } else {
+                        break;
                     }
+                }
+                if (players[i].isBust(0) || players[i].isStand(0)){
+                    i++;
                 }
             }
         }
@@ -184,31 +177,33 @@ public class RoundOfBlackjack {
         System.out.println("Dealer's hole card is a" + dealer.getCard(0,1).toString());
 
         //6) Dealer must hit until >= 17
-        while(dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)){
+        while (dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)) {
             dealer.hit(deck, 0);
-            dealer.getHand(0).toString();
-            if (dealer.getHand(0).getHandValue() > 21){
-                dealer.isBust(0);
+            System.out.println("Dealer hits and draws a " + dealer.getHand(0).getCard(0,0).getName()); //check getCard(0,0) unsure if this right card to display.
+            if (dealer.isBust(0)) {
+                dealer.setBust(0);
+                System.out.println("Dealer is bust!");
             }
         }
 
         //7) Winners calculated & winnings added to bank
-        for (i=0; i<numPlayers; i++){
-            for (int j=0; j<players[i].getNumOfHands(); j++){
-                if(players[i].isWon(j)){
+        int dealerScore = dealer.getHand(0).getHandValue();
+        for (int x=0; x<numPlayers; x++){
+            for (int j=0; j<player[i].getNumOfHands(); j++){
+                if(players[x].isWon(j)){
+                    players[x].addBank(2*players[x].getStake(j));
+                    System.out.println("Congratulations " + players[x].getName() + " you won " + 2*players[x].getStake(j));
+                } else if(dealerScore < players[0].getHand(j).getHandValue() || dealer.isBust(0)){
                     players[i].addBank(2*players[i].getStake(j));
                     System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getStake(j));
-                }
-                else if(players[i].isDraw(j)){  //draw score dealer=player & not blackjack
-                    players[i].addBank(players[i].getStake(j));
-                    System.out.println("It's a draw " + players[i].getName() + " you get your stake of " + players[i].getStake(j) + "back");
+                } else if(players[x].isDraw(j)){  //draw score dealer=player & not blackjack
+                    players[x].addBank(players[x].getStake(j));
+                    System.out.println("It's a draw " + players[x].getName() + " you get your stake of " + players[x].getStake(j) + "back");
                 } else {
-                    System.out.println(players[i].getName() + " you lost");
+                    System.out.println(players[x].getName() + " you lost");
                 }
             }
-            System.out.println("Your total bank is " + players[i].getBank());
+            System.out.println("Your total bank is " + players[x].getBank());
         }
-
-        //define winners? TODO
     }
 }
