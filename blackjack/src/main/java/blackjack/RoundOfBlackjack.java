@@ -170,10 +170,9 @@ public class RoundOfBlackjack {
         while(count<numPlayers){
 
             while(!players[count].isBust(0) && !players[count].isStand(0)){
-                System.out.println(!players[count].isBust(0) || !players[count].isStand(0));
                 players[count].nextAction(deck, 0, dealer.getCard(0, 0));
             }
-            System.out.println(players[count].getName());
+            System.out.println(players[count].getName() + " : " + players[count].getHand(0).getHandValue());
             count++;
         }
         
@@ -181,39 +180,35 @@ public class RoundOfBlackjack {
         //5) Dealer turns over hole card
         System.out.println("Dealer's hole card is a" + dealer.getCard(0,1).toString());
 
-        
         //6) Dealer must hit until >= 17
-        while(dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)){
+        while (dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)) {
             dealer.hit(deck, 0);
-            dealer.getHand(0).toString();
-            if (dealer.getHand(0).getHandValue() > 21){
-                dealer.isBust(0);
-                dealer.nextAction(deck, 0, null);
+            System.out.println("Dealer hits and draws a " + dealer.getHand(0).getCard(0).getName()); //check getCard(0,0) unsure if this right card to display.
+            if (dealer.isBust(0)) {
+                dealer.setBust(0);
+                System.out.println("Dealer is bust!");
             }
         }
-        int dealerScore = dealer.getHand(0).getHandValue();
+
         //7) Winners calculated & winnings added to bank
-        for (int i=0; i<numPlayers; i++){
-            for (int j=0; j<players[i].getNumOfHands(); j++){
-                if(players[i].isWon(j)){    //isBlackjack
-                    players[i].addBank(2*players[i].getStake(j));
-                    System.out.println("Congratulations " + players[i].getName() + " you won you got Blackjack " + 2*players[i].getStake(j));
-                }
-                else if(dealerScore < players[0].getHand(j).getHandValue()){
-                    players[i].addBank(2*players[i].getStake(j));
-                    System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getStake(j));
-
-                }
-                else if(players[i].isDraw(j)){  //draw score dealer=player & not blackjack
-                    players[i].addBank(players[i].getStake(j));
-                    System.out.println("It's a draw " + players[i].getName() + " you get your stake of " + players[i].getStake(j) + "back");
+        int dealerScore = dealer.getHand(0).getHandValue();
+        System.out.println(dealerScore);
+        for (int x=0; x<numPlayers; x++){
+            for (int j=0; j<players[x].getNumOfHands(); j++){
+                if(players[x].isWon(j)){
+                    players[x].addBank(2*players[x].getStake(j));
+                    System.out.println("Congratulations " + players[x].getName() + " you won " + 2*players[x].getStake(j));
+                } else if(dealerScore < players[0].getHand(j).getHandValue() || dealer.isBust(0)){
+                    players[x].addBank(2*players[x].getStake(j));
+                    System.out.println("Congratulations " + players[x].getName() + " you won " + 2*players[x].getStake(j));
+                } else if(players[x].isDraw(j)){  //draw score dealer=player & not blackjack
+                    players[x].addBank(players[x].getStake(j));
+                    System.out.println("It's a draw " + players[x].getName() + " you get your stake of " + players[x].getStake(j) + "back");
                 } else {
-                    System.out.println(players[i].getName() + " you lost");
+                    System.out.println(players[x].getName() + " you lost");
                 }
             }
-            System.out.println("Your total bank is " + players[i].getBank());
+            System.out.println("Your total bank is " + players[x].getBank());
         }
-
-        //define winners? TODO
     }
 }
