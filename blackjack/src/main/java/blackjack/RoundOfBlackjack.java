@@ -1,5 +1,4 @@
 package blackjack;
-import poker.*;
 
 
 // 
@@ -117,15 +116,7 @@ public class RoundOfBlackjack {
             //implement logic for blackjack and continue with current card. TODO
         }
     }
-
-    public boolean allPlayersDone() {
-        for (int i = 0; i < numPlayers; i++) {
-            if (!players[i].isBust(0) || !players[i].isStand(0)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    
 
     public void play(){
         //1)Each player place bet
@@ -166,19 +157,29 @@ public class RoundOfBlackjack {
                 players[0].split();
             }
         }*/
+        int count =0;
+        while(count<numPlayers){
 
-        int i = 0;
-        while (!allPlayersDone() && i < numPlayers) {
-            while (!players[i].isBust(0) || !players[i].isStand(0)){
-                players[i].nextAction(deck, 0, dealer.getCard(0,0));
-                if (players[i].isStand(0) || players[i].isBust(0)){
-                    if (i < numPlayers-1){
-                        i++;
-                    }
-                }
+            while(!players[count].isBust(0) && !players[count].isStand(0)){
+                System.out.println(!players[count].isBust(0) || !players[count].isStand(0));
+                players[count].nextAction(deck, 0, dealer.getCard(0, 0));
             }
+            System.out.println(players[count].getName());
+            count++;
         }
-        
+
+        // for (int i=0; i<players[0].getNumOfHands(); i++){
+        //     while(!players[0].isBust(0)) {      //need an isStand method
+        //         players[0].nextAction(deck, i, dealer.getCard(0, 0));
+        //     }
+        // }
+
+        // //4)b)Computer player while not bust decides move from table
+        // for (int i=1; i < numPlayers; i++) {    //start at 1 as human player is 0
+        //     while (!players[i].isBust(0)){  //computer never splits
+        //         players[i].nextAction(deck, 0, dealer.getCard(0, 0));
+        //     }
+        // }
 
         //5) Dealer turns over hole card
         System.out.println("Dealer's hole card is a" + dealer.getCard(0,1).toString());
@@ -190,7 +191,7 @@ public class RoundOfBlackjack {
         }
 
         //7) Winners calculated & winnings added to bank
-        for (i=0; i<numPlayers; i++){
+        for (int i=0; i<numPlayers; i++){
             for (int j=0; j<players[i].getNumOfHands(); j++){
                 if(players[i].isWon(j)){
                     players[i].addBank(2*players[i].getStake(j));
@@ -208,4 +209,6 @@ public class RoundOfBlackjack {
 
         //define winners? TODO
     }
+
+   
 }
