@@ -170,7 +170,7 @@ public class RoundOfBlackjack {
         int i = 0;
         while (!allPlayersDone() && i < numPlayers) {
             while (!players[i].isBust(0) || !players[i].isStand(0)){
-                players[i].nextAction(deck, 0, dealer.getCard(0,0));
+                players[i].nextAction(deck, 0);
                 if (players[i].isStand(0) || players[i].isBust(0)){
                     if (i < numPlayers-1){
                         i++;
