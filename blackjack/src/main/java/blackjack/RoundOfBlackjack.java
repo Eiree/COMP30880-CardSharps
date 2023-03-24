@@ -126,7 +126,7 @@ public class RoundOfBlackjack {
         while (count < numPlayers) {
             for (int i = 0; i < players[count].getNumOfHands(); i++) {
                 while (!players[count].isBust(i) && !players[count].isStand(i)) {
-                    players[count].nextAction(deck, 0, dealer.getCard(i, 0));
+                    players[count].nextAction(deck, i, dealer.getCard(0, 0));
                 }
                 System.out.println("\n");
             }
