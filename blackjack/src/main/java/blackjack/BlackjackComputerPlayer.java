@@ -57,24 +57,24 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     //always false computer never splits
-    boolean shouldSplit(BlackjackDeck deck, int handIndex) {
+    boolean shouldSplit(BlackjackDeck deck, int handIndex, Card dealerCard) {
         return false;
     }
 
     //hit, double, stand according to table
-    boolean shouldHit(BlackjackDeck deck, int handIndex) {
+    boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard) {
         return true;
     }
 
-    boolean shouldDouble(BlackjackDeck deck, int handIndex) {
+    boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard) {
         return false;
     }
 
-    boolean shouldStand(BlackjackDeck deck, int handIndex) {
+    boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard) {
         return false;
     }
 
-    public boolean shouldSplit(PotOfMoney pot) { // TODO
+    public boolean shouldSplit(PotOfMoney pot, Card dealerCard) { // TODO
         return false; // need to implement this someway
     }
 
