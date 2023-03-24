@@ -6,8 +6,8 @@ import java.util.Random;
 
 // TODO
 // 
-// Deal with cases where the value of player hand >= 21
-//
+// Lookup table
+// Should method ->checks lookup table
 // 
 // 
 // 
