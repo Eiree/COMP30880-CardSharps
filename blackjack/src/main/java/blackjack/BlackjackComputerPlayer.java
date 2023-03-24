@@ -63,7 +63,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
 
     //hit, double, stand according to table
     boolean shouldHit(BlackjackDeck deck, int handIndex) {
-        return false;
+        return true;
     }
 
     boolean shouldDouble(BlackjackDeck deck, int handIndex) {

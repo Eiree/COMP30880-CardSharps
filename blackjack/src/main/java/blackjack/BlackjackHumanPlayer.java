@@ -34,16 +34,14 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
         return false;
     }
 
-    
+
     public boolean shouldSplit(BlackjackDeck deck, int handIndex){
         if(getBank() >= getStake(handIndex)*2)
             if (askQuestion("Do you want to Split the Hands in 2? Current Stakes: " + getStake(handIndex))){
-                doubleDown(deck, handIndex);
                 return true;
             } else {
                 return false;
             }
-
         else
             return false;
     }

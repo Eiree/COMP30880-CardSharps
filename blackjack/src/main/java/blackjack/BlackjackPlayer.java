@@ -79,6 +79,10 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return bust[handIndex];
     }
 
+    public boolean isStand(int handIndex){
+        return stand[handIndex];
+    }
+
     public boolean hasSurrendered(){
         return surrendered;
     }
@@ -225,7 +229,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
             else if(shouldSplit(deck, handIndex))
                 split(deck, handIndex);
         }
-
+        return;
     }
 
 
