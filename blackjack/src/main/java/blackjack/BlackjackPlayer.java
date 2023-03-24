@@ -10,11 +10,11 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     private int bank = 0; //total money player has left (without stake)
     
     private BlackjackHand[] hand = new BlackjackHand[4]; //hands dealt to player
-    private int[] stake = new int[4] ; //stakes of hands 
+    /*private int[] stake = new int[4] ; //stakes of hands
     private boolean[] stand = new boolean[4]; //flag for each hand
     private boolean[] bust = new boolean[4]; //flag for bust
     private boolean[] won = new boolean[4]; //flag for winning hand
-    private boolean[] draw = new boolean[4]; //flag for draw
+    private boolean[] draw = new boolean[4]; //flag for draw*/
 
     private int numOfHands = 1; 
 
@@ -33,9 +33,9 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     }
 
     public void reset(){
-        Arrays.fill(this.stake, 0);
+        /*Arrays.fill(this.stake, 0);
         Arrays.fill(bust,  false);
-        Arrays.fill(stand, false);
+        Arrays.fill(stand, false);*/
         
         hand =  new BlackjackHand[4];
         //win = false;
@@ -63,9 +63,9 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return bank;
     }
 
-    public int getStake(int handIndex){
+    /*public int getStake(int handIndex){
         return stake[handIndex];
-    }
+    }*/
 
     public String getName(){
         return name;
@@ -75,25 +75,25 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return bank == 0;
     }
 
-    public boolean isBust(int handIndex){ //If go over 21
+   /* public boolean isBust(int handIndex){ //If go over 21
         return bust[handIndex];
-    }
+    }*/
 
-    public boolean isStand(int handIndex){
+    /*public boolean isStand(int handIndex){
         return stand[handIndex];
-    }
+    }*/
 
     public boolean hasSurrendered(){
         return surrendered;
     }
 
-    public boolean isWon(int handIndex){ //condition for win.
+    /*public boolean isWon(int handIndex){ //condition for win.
         return won[handIndex];
-    }
+    }*/
 
-    public boolean isDraw(int handIndex){
+    /*public boolean isDraw(int handIndex){
         return draw[handIndex];
-    }
+    }*/
 
     
     //setters
@@ -127,7 +127,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     // }
 
 
-    public boolean hit(BlackjackDeck deck, int handIndex){ //TODO
+    /*public boolean hit(BlackjackDeck deck, int handIndex){ //TODO
         //implement hit functionality
         System.out.println("\n> " + getName() + " says: Hit!");
         hand[handIndex].addCard(deck.dealNext());
@@ -155,15 +155,15 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         hit(deck, handIndex);
         stand(handIndex); //Check functionality
     
-    }
+    }*/
 
-    public boolean canSplit(int handIndex) {
+    /*public boolean canSplit(int handIndex) {
         return hand[handIndex].isSplit() && bank >= stake[handIndex];
-    }
+    }*/
    
 
     //split logic? -- unsure TODO
-    public boolean split(BlackjackDeck deck, int handIndex){
+    /*public boolean split(BlackjackDeck deck, int handIndex){
         if (!canSplit(handIndex)){
             return false;
         }
@@ -178,7 +178,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         bank -= stake[handIndex];
         
         return true;
-    }
+    }*/
 
     public void openBetting(){ //Add player input for amount of the bet
         if (bank == 0){

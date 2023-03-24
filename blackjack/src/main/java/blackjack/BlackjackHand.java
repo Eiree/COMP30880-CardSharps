@@ -14,13 +14,21 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
     
     private Card[] hand;
     public BlackjackDeck deck;
+    private BlackjackPlayer player;
 
-    public BlackjackHand(Card[] hand, BlackjackDeck deck){
+    private int stake;
+    private boolean stand;
+    private boolean bust;
+    private boolean won;
+    private boolean draw;
+
+    public BlackjackHand(Card[] hand, BlackjackDeck deck, BlackjackPlayer player){
         this.hand = hand;
         this.deck = deck;
+        this.player = player;
     }
 
-    public BlackjackHand(BlackjackDeck blackjackDeck){
+    public BlackjackHand(BlackjackDeck blackjackDeck, BlackjackPlayer player){
         this.deck = blackjackDeck;
         hand = new Card[MAXCARDS]; //11 is max possible cards
 
@@ -132,5 +140,68 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
             return true;
         }
         return false;
+    }
+
+    public boolean isStand(){
+        return stand;
+    }
+
+    public boolean isWon(){ //condition for win.
+        return won;
+    }
+
+    public boolean isDraw(){
+        return draw;
+    }
+
+    public boolean hit(BlackjackDeck deck, BlackjackPlayer player){ //TODO
+        //implement hit functionality
+        System.out.println("\n> " + player.getName() + " says: Hit!");
+        addCard(deck.dealNext());
+        System.out.println(hand.toString());
+        return true;
+    }
+
+    public void stand(BlackjackPlayer player){ //TODO
+        //nothing
+        if(!stand){
+            stand = true;
+            System.out.println("\n> " + player.getName() + " says: They will Stand!");
+        }
+    }
+
+    public void doubleDown(BlackjackDeck deck, BlackjackPlayer player){
+        if (player.getBank() < stake) {
+            System.out.println("\n> " + player.getName() + " says: I can't afford to double down!");
+            return;
+        }
+
+        player.addBank(-stake);
+        stake *= 2;
+
+        hit(deck, player);
+        stand(player); //Check functionality
+
+    }
+
+    public boolean canSplit() {
+        return isSplit() && player.getBank() >= stake;
+    }
+
+//split logic? -- unsure TODO
+    public boolean split(BlackjackDeck deck, BlackjackPlayer player){
+        if (!canSplit()){
+            return false;
+        }
+
+        Card[] cards = getCards();
+
+        setCard(1, null);   //Set second card of hirst hand to null
+        new BlackjackHand(new Card[]{cards[1]}, deck, player); //Add the card to new hand
+
+        //hand[numOfHands].addCard(cards[0]);
+        player.addBank(-stake);
+
+        return true;
     }
 }
