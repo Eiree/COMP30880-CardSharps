@@ -191,6 +191,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
 //split logic? -- unsure TODO
     public boolean split(BlackjackDeck deck, BlackjackPlayer player){
         if (!canSplit()){
+
             return false;
         }
 

@@ -168,6 +168,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
             return false;
         }
 
+
         Card[] cards = hand[handIndex].getCards();
         
         hand[handIndex].setCard(1, null);   //Set second card of hirst hand to null
