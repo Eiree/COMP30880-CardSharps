@@ -188,6 +188,9 @@ public class RoundOfBlackjack {
         while(dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)){
             dealer.hit(deck, 0);
             dealer.getHand(0).toString();
+            if (dealer.getHand(0).getHandValue() > 21){
+                dealer.isBust(0);
+            }
         }
 
         //7) Winners calculated & winnings added to bank
