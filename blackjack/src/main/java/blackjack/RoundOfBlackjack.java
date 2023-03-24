@@ -118,6 +118,15 @@ public class RoundOfBlackjack {
         }
     }
 
+    public boolean allPlayersDone() {
+        for (int i = 0; i < numPlayers; i++) {
+            if (!players[i].isBust(0) || !players[i].isStand(0)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void play(){
         //1)Each player place bet
         for (int i = 0; i < numPlayers; i++) {
@@ -159,21 +168,12 @@ public class RoundOfBlackjack {
         }*/
 
         int i = 0;
-        if (i<players[0].getNumOfHands()){
-            if(!players[0].isBust(0) || !players[0].isStand(0)) {      //need an isStand method
-                players[0].nextAction(deck, i);
-            } else {
-                i++;
-            }
-        }
-
-        //4)b)Computer player while not bust decides move from table
-        for (i=1; i < numPlayers; i++) {    //start at 1 as human player is 0
-            if (!players[i].isBust(0 ) || !players[i].isStand(i)){  //computer never splits
-                players[i].nextAction(deck, 0);
-            } else {
-                System.out.println();
-                i++;
+        while (!allPlayersDone()) {
+            while (!players[i].isBust(i) || !players[i].isStand(i)){
+                players[i].nextAction(deck, i);
+                if (players[i].isBust(i) || players[i].isStand(i)){
+                    i++;
+                }
             }
         }
         
