@@ -51,6 +51,12 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return stake[handIndex];
     }
 
+    public void resetStake(int handIndex) {
+        for (int i = 0; i < stake.length; i++) {
+            stake[handIndex] = 1;
+        }
+    }
+
     public String getName(){
         return name;
     }
@@ -140,16 +146,14 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         if (!canSplit(handIndex)){
             return false;
         }
-
-        Card[] cards = hand[handIndex].getCards();
-        
-        hand[handIndex].setCard(1, null);   //Set second card of hirst hand to null
-        hand[numOfHands++] = new BlackjackHand(new Card[]{cards[1]}, deck); //Add the card to new hand
-        
-        //hand[numOfHands].addCard(cards[0]);
-        
         bank -= stake[handIndex];
+
+        Card card = hand[handIndex].getCards()[1];
         
+        hand[handIndex].setCard(1, deck.dealNext());   //Set second card of hirst hand to null
+        hand[numOfHands] = new BlackjackHand(new Card[]{card, deck.dealNext()}, deck); //Add the card to new hand
+                
+        numOfHands++;
         return true;
     }
 

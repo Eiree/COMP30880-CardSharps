@@ -21,22 +21,6 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
         deck = new BlackjackDeck();
     }
 
-
-
-    //TODO
-    // DEALER HANDLED HERE
-    // 
-    // Handle Bankrupcy
-    // Initialize players
-    // Initialize deck and pass it to the round
-    // counter for num of players
-    // input for name
-    // contructor to take names and bank(??)
-    // getters and setters
-    // play method handle rounds
-    // check for termination
-
-
     public int getNumPlayers(){
         return numPlayers;
     }
@@ -55,8 +39,6 @@ public class GameOfBlackjack { //reference Gameofpoker.java in poker
         } catch (Exception e) {
         };
     }
-
-
 
     public static void main(String[] args) {
         
