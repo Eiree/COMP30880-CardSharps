@@ -1,12 +1,11 @@
 package blackjack;
 import poker.*;
 
-public abstract class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by abstract methods such as shouldSplit etc
+public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by abstract methods such as shouldSplit etc
     //constructor
     public BlackjackHumanPlayer(String name, int money){
         super(name, money);
     }
-
 
     // todo (verify) DECISIONS
     public boolean askQuestion(String question) {

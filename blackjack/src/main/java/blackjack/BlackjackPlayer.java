@@ -14,6 +14,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     private boolean[] stand = new boolean[4]; //flag for each hand
     private boolean[] bust = new boolean[4]; //flag for bust
     private boolean[] won = new boolean[4]; //flag for winning hand
+    private boolean[] draw = new boolean[4]; //flag for draw
 
     private int numOfHands = 1; 
 
@@ -37,8 +38,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         Arrays.fill(stand, false);
         
         hand =  new BlackjackHand[4];
-
-        surrendered = false;
         //win = false;
     }
 
@@ -88,6 +87,10 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return won[handIndex];
     }
 
+    public boolean isDraw(int handIndex){
+        return draw[handIndex];
+    }
+
     
     //setters
     public void dealTo(BlackjackDeck deck, int originalStake){
@@ -122,7 +125,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
 
     public void hit(BlackjackDeck deck, int handIndex){ //TODO
         //implement hit functionality
-        
         System.out.println("\n> " + getName() + " says: Hit!");
         hand[handIndex].addCard(deck.dealNext());
         
@@ -201,10 +203,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
 
     //game decisions
     public void nextAction(BlackjackDeck deck, int handIndex){ //need to implement functions such as hit etc
-        if (hasSurrendered()){
-            return;
-        }
-        //CHANGE SURRENDER
         //TODO
         // if (isBankrupt()){
         //     System.out.println("\n> " + getName() + " says: I'm out!\n");

@@ -29,12 +29,16 @@ public class RoundOfBlackjack {
     private BlackjackDeck deck;
     private int numPlayers;
 
-    public RoundOfBlackjack(BlackjackDeck deck, BlackjackPlayer[] players){
+    public RoundOfBlackjack(BlackjackDeck deck, BlackjackPlayer[] players, BlackjackPlayer dealer){
         this.players = players;
+        this.dealer = dealer;
         this.deck = deck;
         numPlayers = players.length;
         System.out.println("\n\nNew round:\n\n");
         deal();
+        openRound();
+
+        //openbetting needs input for stake
 
         //conditions to deal
         //openRound();
@@ -74,28 +78,29 @@ public class RoundOfBlackjack {
         //players and dealer
         for (int i = 0; i < getNumPlayers(); i++){
             BlackjackPlayer currentPlayer = getPlayer(i);
-            if (currentPlayer == null || currentPlayer.hasSurrendered()){
+            if (currentPlayer == null){
                 continue;
             }
-            score = currentPlayer.getHand().getValue();
+            //check for split.
+            score = currentPlayer.getHand(i).getValue();
         }
         return score;
     }
 
-/*    public void deal(){
+    public void deal(){
         for (int i = 0; i < getNumPlayers(); i++){
             if (getPlayer(i) != null){
                 if (getPlayer(i).isBankrupt()){
                     removePlayer(i);
                 } else {
                     getPlayer(i).reset();
-                    getPlayer(i).dealTo(deck);
+                    getPlayer(i).dealTo(deck, i);
                     System.out.println(getPlayer(i));
                 }
             }
         }
         System.out.println("\n");
-    }*/
+    }
 
 
     //allow players to hit/stand/split/surrender.
@@ -114,7 +119,6 @@ public class RoundOfBlackjack {
     }
 
     public void play(){
-
         //1)Each player place bet
         for (int i = 0; i < numPlayers; i++) {
             BlackjackPlayer player = getPlayer(i);
@@ -122,7 +126,7 @@ public class RoundOfBlackjack {
                 continue;
             }
             //player selects stake
-            player.openBetting();
+            player.openBetting(); //every player puts an initial stake
         }
 
         //2)Each player gets 2 cards face up
@@ -130,13 +134,13 @@ public class RoundOfBlackjack {
             if (player == null || player.isBankrupt()){
                 continue;
             }
-            player.dealHand(deck, player.getStake(0));
+            player.dealTo(deck, player.getStake(0));
             System.out.println(player.getName() + " has a " + player.getCard(0,0).getName()
                     + " & a " + player.getCard(0,1).getName());
         }
 
         //3)Dealer gets two cards
-        dealer.dealHand(deck, dealer.getStake(0));
+        dealer.dealTo(deck, 0);
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
         //4)a)Human player while not bust decides move
@@ -152,6 +156,7 @@ public class RoundOfBlackjack {
                 players[0].split();
             }
         }*/
+
         for (int i=0; i<players[0].getNumOfHands(); i++){
             while(!players[0].isBust(i)) {      //need an isStand method
                 players[0].nextAction(deck, i);
@@ -227,13 +232,4 @@ public class RoundOfBlackjack {
 
         //define winners? TODO
     }
-
-
-    private void delay(int numMilliseconds) {
-        try {
-            Thread.sleep(numMilliseconds);
-        } catch (Exception e) {
-        }
-    }
-
 }
