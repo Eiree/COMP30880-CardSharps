@@ -159,8 +159,7 @@ public class RoundOfBlackjack {
         }*/
 
         int i = 0;
-
-        for (i=0; i<players[0].getNumOfHands(); i++){
+        if (i<players[0].getNumOfHands()){
             if(!players[0].isBust(0) || !players[0].isStand(0)) {      //need an isStand method
                 players[0].nextAction(deck, i);
             } else {
@@ -170,12 +169,14 @@ public class RoundOfBlackjack {
 
         //4)b)Computer player while not bust decides move from table
         for (i=1; i < numPlayers; i++) {    //start at 1 as human player is 0
-            if (!players[i].isBust(0)){  //computer never splits
+            if (!players[i].isBust(0 ) || !players[i].isStand(i)){  //computer never splits
                 players[i].nextAction(deck, 0);
             } else {
+                System.out.println();
                 i++;
             }
         }
+        
 
         //5) Dealer turns over hole card
         System.out.println("Dealer's hole card is a" + dealer.getCard(0,1).toString());
