@@ -25,27 +25,34 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
         super(name, money);
 
         decisionMatrix = new char[][]{
-                // Dealer's hand in range of values 2-A
-                {'E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 1
-                {'E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 2
-                {'E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 3
-                {'H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 4
-                {'H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 5
-                {'H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 6
-                {'H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 7
-                {'H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 8
-                {'H','D','D','D','D','H','H','H','H','H'}, //computer's hand = 9
-                {'D','D','D','D','D','D','D','D','H','H'}, //computer's hand = 10
-                {'D','D','D','D','D','D','D','D','D','D'}, //computer's hand = 11
-                {'H','H','S','S','S','H','H','H','H','H'}, //computer's hand = 12
-                {'S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 13
-                {'S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 14
-                {'S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 15
-                {'S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 16
-                {'S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 17
-                {'S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 18
-                {'S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 19
-                {'S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 20
+                /*
+                *   E = Error
+                *   S = Stand
+                *   D = Double
+                *   H = Hold
+                 */
+                // Dealer's hand in range of values 0-A
+                {'E','E','E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 0
+                {'E','E','E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 1
+                {'E','E','E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 2
+                {'E','E','E','E','E','E','E','E','E','E','E','E'}, //computer's hand = 3
+                {'E','E','H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 4
+                {'E','E','H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 5
+                {'E','E','H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 6
+                {'E','E','H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 7
+                {'E','E','H','H','H','H','H','H','H','H','H','H'}, //computer's hand = 8
+                {'E','E','H','D','D','D','D','H','H','H','H','H'}, //computer's hand = 9
+                {'E','E','D','D','D','D','D','D','D','D','H','H'}, //computer's hand = 10
+                {'E','E','D','D','D','D','D','D','D','D','D','D'}, //computer's hand = 11
+                {'E','E','H','H','S','S','S','H','H','H','H','H'}, //computer's hand = 12
+                {'E','E','S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 13
+                {'E','E','S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 14
+                {'E','E','S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 15
+                {'E','E','S','S','S','S','S','H','H','H','H','H'}, //computer's hand = 16
+                {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 17
+                {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 18
+                {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 19
+                {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 20
         };
     }
 
