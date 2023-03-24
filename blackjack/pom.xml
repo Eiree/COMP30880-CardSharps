@@ -37,7 +37,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>GameOfBlackjack</mainClass>
+                    <mainClass>blackjack.GameOfBlackjack</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -55,7 +55,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.0.4</version>
                 <configuration>
-                    <mainClass>GameOfBlackjack</mainClass>
+                    <mainClass>blackjack.GameOfBlackjack</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>
