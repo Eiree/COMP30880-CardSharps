@@ -66,10 +66,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
 
     //hit, double, stand according to table
     boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        System.out.println("Hit");
-        System.out.println("Dealer card: " + dealerCard.getValue());
-        System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
-        if(HIT_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+        if(HIT_MOVE == DECISION_MATRIX[dealerCard.getValue()][this.getHand(handIndex).getHandValue()]) {
             return true;
         }
         else {
@@ -78,10 +75,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        System.out.println("Double");
-        System.out.println("Dealer card: " + dealerCard.getValue());
-        System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
-        if(DOUBLE_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+        if(DOUBLE_MOVE == DECISION_MATRIX[dealerCard.getValue()][this.getHand(handIndex).getHandValue()]) {
             return true;
         }
         else {
@@ -90,10 +84,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard) {
-        System.out.println("Stand");
-        System.out.println("Dealer card: " + dealerCard.getValue());
-        System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
-        if(STAND_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+        if(STAND_MOVE == DECISION_MATRIX[dealerCard.getValue()][this.getHand(handIndex).getHandValue()]) {
             return true;
         }
         else {
