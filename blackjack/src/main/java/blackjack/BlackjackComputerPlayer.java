@@ -25,6 +25,27 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
         super(name, money);
     }
 
+    //always false computer never splits
+    @Override
+    boolean shouldSplit(BlackjackDeck deck, int handIndex) {
+        return false;
+    }
+
+    //hit, double, stand according to table
+    @Override
+    boolean shouldHit(BlackjackDeck deck, int handIndex) {
+        return false;
+    }
+
+    @Override
+    boolean shouldDouble(BlackjackDeck deck, int handIndex) {
+        return false;
+    }
+
+    @Override
+    boolean shouldStand(BlackjackDeck deck, int handIndex) {
+        return false;
+    }
 
 
     //todo (verify) DECISIONS
@@ -44,20 +65,6 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
 
         return false;
     }
-
-
-
-    // public boolean shouldOpen(PotOfMoney pot) {
-    //     return true;
-    // }
-
-    // public boolean shouldSee(PotOfMoney pot) {
-    //     if (getStake() == 0)
-    //         return true;
-    //     else
-    //         return askQuestion("Do you want to see the bet of " +
-    //                 addCount(pot.getCurrentStake() - getStake(), "chip", "chips"));
-    // }
 
     public boolean shouldSplit(PotOfMoney pot) { //TODO
         return false; // need to implement this someway
