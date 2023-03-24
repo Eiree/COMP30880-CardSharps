@@ -58,8 +58,8 @@ public class BlackjackDeck {
             return deck[next++];
     }
 
-    public BlackjackHand dealHand(){ //deals hand
-        BlackjackHand hand = new BlackjackHand(this);
+    public BlackjackHand dealHand(BlackjackPlayer player){ //deals hand
+        BlackjackHand hand = new BlackjackHand(this, player);
         return hand; //can catergorise
     }
 }

@@ -154,7 +154,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         return draw;
     }
 
-    public boolean hit(BlackjackDeck deck, BlackjackPlayer player){ //TODO
+    public boolean hit(BlackjackDeck deck){ //TODO
         //implement hit functionality
         System.out.println("\n> " + player.getName() + " says: Hit!");
         addCard(deck.dealNext());
@@ -162,7 +162,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         return true;
     }
 
-    public void stand(BlackjackPlayer player){ //TODO
+    public void stand(){ //TODO
         //nothing
         if(!stand){
             stand = true;
@@ -170,7 +170,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         }
     }
 
-    public void doubleDown(BlackjackDeck deck, BlackjackPlayer player){
+    public void doubleDown(BlackjackDeck deck){
         if (player.getBank() < stake) {
             System.out.println("\n> " + player.getName() + " says: I can't afford to double down!");
             return;
@@ -179,8 +179,8 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         player.addBank(-stake);
         stake *= 2;
 
-        hit(deck, player);
-        stand(player); //Check functionality
+        hit(deck);
+        stand(); //Check functionality
 
     }
 
@@ -189,7 +189,7 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
     }
 
 //split logic? -- unsure TODO
-    public boolean split(BlackjackDeck deck, BlackjackPlayer player){
+    public boolean split(BlackjackDeck deck){
         if (!canSplit()){
 
             return false;
@@ -204,5 +204,21 @@ public class BlackjackHand { //reference pokerhand.java in poker, references bot
         player.addBank(-stake);
 
         return true;
+    }
+
+    public void setStake(int newStake) {
+        stake = newStake;
+    }
+
+    public int getStake() {
+        return stake;
+    }
+
+    public void setWon(boolean newWon) {
+        won = newWon;
+    }
+
+    public void setBust(boolean newBust) {
+        bust = newBust;
     }
 }

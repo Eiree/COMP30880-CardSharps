@@ -25,9 +25,9 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
         return false;
     }
 
-    public boolean shouldDouble(BlackjackDeck deck, int handIndex) { // TODO---------------
-        if(getBank() >= getStake(handIndex)*2){
-            if(askQuestion("Do you want to Double the Stakes and Get a Card? Current Stakes: " + getStake(handIndex))){
+    public boolean shouldDouble(BlackjackDeck deck, BlackjackHand hand) { // TODO---------------
+        if(getBank() >= hand.getStake()*2){
+            if(askQuestion("Do you want to Double the Stakes and Get a Card? Current Stakes: " + hand.getStake())){
                 return true;
             }
         }
@@ -35,9 +35,9 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
     }
 
 
-    public boolean shouldSplit(BlackjackDeck deck, int handIndex){
-        if(getBank() >= getStake(handIndex)*2)
-            if (askQuestion("Do you want to Split the Hands in 2? Current Stakes: " + getStake(handIndex))){
+    public boolean shouldSplit(BlackjackDeck deck, BlackjackHand hand){
+        if(getBank() >= hand.getStake()*2)
+            if (askQuestion("Do you want to Split the Hands in 2? Current Stakes: " + hand.getStake())){
                 return true;
             } else {
                 return false;
@@ -46,7 +46,7 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
             return false;
     }
 
-    public boolean shouldHit(BlackjackDeck deck, int handIndex) { // TODO---------------
+    public boolean shouldHit(BlackjackDeck deck, BlackjackHand hand) { // TODO---------------
          if(askQuestion("Do you want to Hit?")){
             return true;
          }
@@ -55,7 +55,7 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
          }
     }
 
-    public boolean shouldStand(BlackjackDeck deck, int handIndex){
+    public boolean shouldStand(BlackjackDeck deck, BlackjackHand hand){
         if(askQuestion("Do you want to Stand?")){
             return true;
         }

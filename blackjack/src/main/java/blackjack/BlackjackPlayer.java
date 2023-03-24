@@ -97,15 +97,16 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
 
     
     //setters
-    public void dealTo(BlackjackDeck deck, int originalStake){
+    public void dealTo(BlackjackDeck deck, int originalStake, BlackjackPlayer player){
         //Only Give 2 Cards when first dealt a hand
 
         if(originalStake>bank || isBankrupt()){
             //Need to do error handeling
         }
 
-        hand[0] = deck.dealHand();
-        stake[0] = originalStake;
+        hand[0] = deck.dealHand(player);
+        //stake[0] = originalStake;
+        player.getHand(0).setStake(originalStake);
     }
 
 
@@ -186,7 +187,8 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
             return;
         }
 
-        stake[0]++;    // Player Input
+        //stake[0]++;    // Player Input
+
         bank--;     //Player Input
 
         System.out.println("\n> " + getName() + " says: I open with one chip!\n");
@@ -198,7 +200,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     abstract boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard);
 
     //game decisions
-    public void nextAction(BlackjackDeck deck, int handIndex, Card dealerCard){ //need to implement functions such as hit etc
+    public void nextAction(BlackjackDeck deck, BlackjackHand hand, BlackjackPlayer player,Card dealerCard){ //need to implement functions such as hit etc
         //TODO
         // if (isBankrupt()){
         //     System.out.println("\n> " + getName() + " says: I'm out!\n");
@@ -206,32 +208,33 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         //     return;
         // }
 
-        if (hand[handIndex].isBlackjack()){
+        if (hand.isBlackjack()){
             System.out.println("\n> " + getName() + " says: I have blackjack!\n");
             
             //CHECKING FOR BLACKJACK
-            won[handIndex] = true;
+            hand.setWon(true);
             
             return;
         }
 
-        if (hand[handIndex].isBust()) {
+        if (hand.isBust()) {
             System.out.println("\n> " + getName() + " says: I have bust!\n");
-            bust[handIndex] = true;
+            //bust[handIndex] = true;
+            hand.setBust(true);
             return;
         }
         //TODO see functioning
         else{
             if(shouldHit(deck, handIndex, dealerCard)){
                 System.out.println("SHOULD HIT");
-                System.out.println(hit(deck, handIndex));
+                System.out.println(hand.hit(deck));
             System.out.println("HAS HIT");}
             else if(shouldStand(deck, handIndex, dealerCard))
-                stand(handIndex);
+                hand.stand();
             else if(shouldDouble(deck, handIndex,dealerCard))
-                doubleDown(deck, handIndex);
+                hand.doubleDown(deck);
             else if(shouldSplit(deck, handIndex, dealerCard))
-                split(deck, handIndex);
+                hand.split(deck);
         }
         return;
     }

@@ -94,7 +94,7 @@ public class RoundOfBlackjack {
                     removePlayer(i);
                 } else {
                     getPlayer(i).reset();
-                    getPlayer(i).dealTo(deck, i);
+                    getPlayer(i).dealTo(deck, i, getPlayer(i));
                     System.out.println(getPlayer(i));
                 }
             }
@@ -120,7 +120,7 @@ public class RoundOfBlackjack {
 
     public boolean allPlayersDone() {
         for (int i = 0; i < numPlayers; i++) {
-            if (!players[i].isBust(0) || !players[i].isStand(0)) {
+            if (!players[i].getHand(0).isBust() || !players[i].getHand(0).isStand()) {
                 return false;
             }
         }
@@ -143,14 +143,14 @@ public class RoundOfBlackjack {
             if (player == null || player.isBankrupt()){
                 continue;
             }
-            player.dealTo(deck, player.getStake(0));
+            player.dealTo(deck, player.getHand(0).getStake(), player);
             System.out.println(player.getName() + " has a " + player.getCard(0,0).toString()
                     + " & a " + player.getCard(0,1).toString());
         }
 
         //3)Dealer gets two cards
 
-        dealer.dealTo(deck, 0);
+        dealer.dealTo(deck, 0, dealer);
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
         //4)a)Human player while not bust decides move
@@ -169,9 +169,10 @@ public class RoundOfBlackjack {
 
         int i = 0;
         while (!allPlayersDone() && i < numPlayers) {
-            while (!players[i].isBust(0) || !players[i].isStand(0)){
+            BlackjackHand playerHand = players[i].getHand(0);
+            while (!playerHand.isBust() || !playerHand.isStand()){
                 players[i].nextAction(deck, 0, dealer.getCard(0,0));
-                if (players[i].isStand(0) || players[i].isBust(0)){
+                if (playerHand.isStand() || playerHand.isBust()){
                     if (i < numPlayers-1){
                         i++;
                     }
@@ -184,24 +185,24 @@ public class RoundOfBlackjack {
         System.out.println("Dealer's hole card is a" + dealer.getCard(0,1).toString());
 
         //6) Dealer must hit until >= 17
-        while(dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.isBust(0)){
-            dealer.hit(deck, 0);
+        while(dealer.getHand(0).getHandValue() < DEALERMIN && !dealer.getHand(0).isBust()){
+            dealer.getHand(0).hit(deck);
             dealer.getHand(0).toString();
             if (dealer.getHand(0).getHandValue() > 21){
-                dealer.isBust(0);
+                dealer.getHand(0).isBust();
             }
         }
 
         //7) Winners calculated & winnings added to bank
         for (i=0; i<numPlayers; i++){
             for (int j=0; j<players[i].getNumOfHands(); j++){
-                if(players[i].isWon(j)){
-                    players[i].addBank(2*players[i].getStake(j));
-                    System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getStake(j));
+                if(players[i].getHand(i).isWon()){
+                    players[i].addBank(2*players[i].getHand(j).getStake());
+                    System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getHand(j).getStake());
                 }
-                else if(players[i].isDraw(j)){  //draw score dealer=player & not blackjack
-                    players[i].addBank(players[i].getStake(j));
-                    System.out.println("It's a draw " + players[i].getName() + " you get your stake of " + players[i].getStake(j) + "back");
+                else if(players[i].getHand(j).isDraw()){  //draw score dealer=player & not blackjack
+                    players[i].addBank(players[i].getHand(j).getStake());
+                    System.out.println("It's a draw " + players[i].getName() + " you get your stake of " + players[i].getHand(j).getStake() + "back");
                 } else {
                     System.out.println(players[i].getName() + " you lost");
                 }
