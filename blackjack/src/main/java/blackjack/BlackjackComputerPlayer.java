@@ -57,7 +57,7 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
                 {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 18
                 {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 19
                 {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 20
-                {'S','S','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 21
+                {'E','E','S','S','S','S','S','S','S','S','S','S'}, //computer's hand = 21
 
         };
     }
