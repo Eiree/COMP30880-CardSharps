@@ -130,13 +130,13 @@ public class RoundOfBlackjack {
             if (player == null || player.isBankrupt()){
                 continue;
             }
-            player.dealHand(deck, player.getStake(0));
+            player.dealTo(deck, player.getStake(0));
             System.out.println(player.getName() + " has a " + player.getCard(0,0).getName()
                     + " & a " + player.getCard(0,1).getName());
         }
 
         //3)Dealer gets two cards
-        dealer.dealHand(deck, dealer.getStake(0));
+        dealer.dealTo(deck, dealer.getStake(0));
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
         //4)a)Human player while not bust decides move
@@ -190,40 +190,6 @@ public class RoundOfBlackjack {
             }
             System.out.println("Your total bank is " + players[i].getBank());
         }
-
-
-
-
-
-        /*PotOfMoney pot = new PotOfMoney();
-        int numActive = getNumActivePlayers();
-        int stake = -1;
-        BlackjackPlayer currentPlayer = null;
-        deck.reset();
-
-        while (stake < pot.getCurrentStake() && numActive > 0){
-            stake = pot.getCurrentStake();
-            for (int i = 0; i < getNumPlayers(); i++){
-                currentPlayer = getPlayer(i);
-                if (currentPlayer == null || currentPlayer.hasSurrendered()){ // if(player[i].getHand[j] !bust && player.getHand[j] !stood)
-                    continue;
-                }
-
-                delay(DELAY_BETWEEN_ACTIONS);
-
-                //check active players, if player wins takePot(pot) etc TODO
-
-
-                if (currentPlayer.hasSurrendered()){
-                    numActive--;
-                }
-
-            }
-        }
-        if (numActive == 0){
-            System.out.println("\nNo players remaining in the game.\n");
-            return;
-        }*/
 
         //define winners? TODO
     }
