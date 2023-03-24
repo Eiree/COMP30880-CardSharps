@@ -14,6 +14,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     private boolean[] stand = new boolean[4]; //flag for each hand
     private boolean[] bust = new boolean[4]; //flag for bust
     private boolean[] won = new boolean[4]; //flag for winning hand
+    private boolean[] draw = new boolean[4]; //flag for draw
 
     private int numOfHands = 1; 
 
@@ -37,8 +38,6 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         Arrays.fill(stand, false);
         
         hand =  new BlackjackHand[4];
-
-        surrendered = false;
         //win = false;
     }
 
@@ -80,12 +79,20 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return bust[handIndex];
     }
 
+    public boolean isStand(int handIndex){
+        return stand[handIndex];
+    }
+
     public boolean hasSurrendered(){
         return surrendered;
     }
 
     public boolean isWon(int handIndex){ //condition for win.
         return won[handIndex];
+    }
+
+    public boolean isDraw(int handIndex){
+        return draw[handIndex];
     }
 
     
@@ -100,6 +107,12 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         hand[0] = deck.dealHand();
         stake[0] = originalStake;
     }
+
+
+    public void addBank(int addition){
+        bank += addition;
+    }
+
     //TODO
 
     // // player actions
@@ -114,12 +127,12 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     // }
 
 
-    public void hit(BlackjackDeck deck, int handIndex){ //TODO
+    public boolean hit(BlackjackDeck deck, int handIndex){ //TODO
         //implement hit functionality
-        
         System.out.println("\n> " + getName() + " says: Hit!");
         hand[handIndex].addCard(deck.dealNext());
-        
+        System.out.println(hand[handIndex]);
+        return true;
     }
 
     public void stand(int handIndex){ //TODO
@@ -167,28 +180,24 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return true;
     }
 
-    public void openBetting(int handIndex){ //Add player input for amount of the bet
+    public void openBetting(){ //Add player input for amount of the bet
         if (bank == 0){
             return;
         }
 
-        stake[handIndex]++;    // Player Input
-        bank--;     //Plyaer INput
-        
+        stake[0]++;    // Player Input
+        bank--;     //Player Input
+
         System.out.println("\n> " + getName() + " says: I open with one chip!\n");
     }
    
-    abstract boolean shouldSplit(BlackjackDeck deck, int handIndex);
-    abstract boolean shouldHit(BlackjackDeck deck, int handIndex);
-    abstract boolean shouldDouble(BlackjackDeck deck, int handIndex);
-    abstract boolean shouldStand(BlackjackDeck deck, int handIndex);
+    abstract boolean shouldSplit(BlackjackDeck deck, int handIndex, Card dealerCard);
+    abstract boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard);
+    abstract boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard);
+    abstract boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard);
 
     //game decisions
-    public void nextAction(BlackjackDeck deck, int handIndex){ //need to implement functions such as hit etc
-        if (hasSurrendered()){
-            return;
-        }
-        //CHANGE SURRENDER
+    public void nextAction(BlackjackDeck deck, int handIndex, Card dealerCard){ //need to implement functions such as hit etc
         //TODO
         // if (isBankrupt()){
         //     System.out.println("\n> " + getName() + " says: I'm out!\n");
@@ -212,16 +221,18 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
         //TODO see functioning
         else{
-            if(shouldHit(deck, handIndex))
-                hit(deck, handIndex);
-            else if(shouldStand(deck, handIndex))
+            if(shouldHit(deck, handIndex, dealerCard)){
+                System.out.println("SHOULD HIT");
+                System.out.println(hit(deck, handIndex));
+            System.out.println("HAS HIT");}
+            else if(shouldStand(deck, handIndex, dealerCard))
                 stand(handIndex);
-            else if(shouldDouble(deck, handIndex))
+            else if(shouldDouble(deck, handIndex,dealerCard))
                 doubleDown(deck, handIndex);
-            else if(shouldSplit(deck, handIndex))
+            else if(shouldSplit(deck, handIndex, dealerCard))
                 split(deck, handIndex);
         }
-
+        return;
     }
 
 
