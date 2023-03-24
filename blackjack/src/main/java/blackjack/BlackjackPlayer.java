@@ -194,10 +194,10 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         System.out.println("\n> " + getName() + " says: I open with one chip!\n");
     }
    
-    abstract boolean shouldSplit(BlackjackDeck deck, int handIndex, Card dealerCard);
-    abstract boolean shouldHit(BlackjackDeck deck, int handIndex, Card dealerCard);
-    abstract boolean shouldDouble(BlackjackDeck deck, int handIndex, Card dealerCard);
-    abstract boolean shouldStand(BlackjackDeck deck, int handIndex, Card dealerCard);
+    abstract boolean shouldSplit(BlackjackDeck deck, BlackjackHand hand, Card dealerCard);
+    abstract boolean shouldHit(BlackjackDeck deck, BlackjackHand hand, Card dealerCard);
+    abstract boolean shouldDouble(BlackjackDeck deck, BlackjackHand hand, Card dealerCard);
+    abstract boolean shouldStand(BlackjackDeck deck, BlackjackHand hand, Card dealerCard);
 
     //game decisions
     public void nextAction(BlackjackDeck deck, BlackjackHand hand, BlackjackPlayer player,Card dealerCard){ //need to implement functions such as hit etc
@@ -225,15 +225,15 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
         //TODO see functioning
         else{
-            if(shouldHit(deck, handIndex, dealerCard)){
+            if(shouldHit(deck, hand, dealerCard)){
                 System.out.println("SHOULD HIT");
                 System.out.println(hand.hit(deck));
             System.out.println("HAS HIT");}
-            else if(shouldStand(deck, handIndex, dealerCard))
+            else if(shouldStand(deck, hand, dealerCard))
                 hand.stand();
-            else if(shouldDouble(deck, handIndex,dealerCard))
+            else if(shouldDouble(deck, hand,dealerCard))
                 hand.doubleDown(deck);
-            else if(shouldSplit(deck, handIndex, dealerCard))
+            else if(shouldSplit(deck, hand, dealerCard))
                 hand.split(deck);
         }
         return;

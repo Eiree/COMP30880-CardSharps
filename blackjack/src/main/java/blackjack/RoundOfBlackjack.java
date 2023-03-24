@@ -171,7 +171,7 @@ public class RoundOfBlackjack {
         while (!allPlayersDone() && i < numPlayers) {
             BlackjackHand playerHand = players[i].getHand(0);
             while (!playerHand.isBust() || !playerHand.isStand()){
-                players[i].nextAction(deck, 0, dealer.getCard(0,0));
+                players[i].nextAction(deck, playerHand, players[i], dealer.getCard(0,0));
                 if (playerHand.isStand() || playerHand.isBust()){
                     if (i < numPlayers-1){
                         i++;

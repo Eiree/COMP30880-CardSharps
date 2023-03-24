@@ -25,7 +25,7 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
         return false;
     }
 
-    public boolean shouldDouble(BlackjackDeck deck, BlackjackHand hand) { // TODO---------------
+    public boolean shouldDouble(BlackjackDeck deck, BlackjackHand hand, Card dealerCard) { // TODO---------------
         if(getBank() >= hand.getStake()*2){
             if(askQuestion("Do you want to Double the Stakes and Get a Card? Current Stakes: " + hand.getStake())){
                 return true;
@@ -35,7 +35,7 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
     }
 
 
-    public boolean shouldSplit(BlackjackDeck deck, BlackjackHand hand){
+    public boolean shouldSplit(BlackjackDeck deck, BlackjackHand hand, Card dealerCard){
         if(getBank() >= hand.getStake()*2)
             if (askQuestion("Do you want to Split the Hands in 2? Current Stakes: " + hand.getStake())){
                 return true;
@@ -46,7 +46,7 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
             return false;
     }
 
-    public boolean shouldHit(BlackjackDeck deck, BlackjackHand hand) { // TODO---------------
+    public boolean shouldHit(BlackjackDeck deck, BlackjackHand hand, Card dealerCard) { // TODO---------------
          if(askQuestion("Do you want to Hit?")){
             return true;
          }
@@ -55,7 +55,7 @@ public class BlackjackHumanPlayer extends BlackjackPlayer { //error caused by ab
          }
     }
 
-    public boolean shouldStand(BlackjackDeck deck, BlackjackHand hand){
+    public boolean shouldStand(BlackjackDeck deck, BlackjackHand hand, Card dealerCard){
         if(askQuestion("Do you want to Stand?")){
             return true;
         }
