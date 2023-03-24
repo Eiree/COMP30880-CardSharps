@@ -51,6 +51,12 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return stake[handIndex];
     }
 
+    public void resetStake(int handIndex) {
+        for (int i = 0; i < stake.length; i++) {
+            stake[handIndex] = 1;
+        }
+    }
+
     public String getName(){
         return name;
     }

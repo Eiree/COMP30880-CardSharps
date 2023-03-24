@@ -1,24 +1,5 @@
 package blackjack;
-import poker.*;
 
-
-// 
-// Dealing hands changed
-// original stake
-// open round
-// remove pot
-// play method
-// check hands bust or stand and play with next player
-// dealer functionality (only hit < 17)
-// win checking for each hand
-// bankrupcy check
-// no best player
-// multiple winners
-// working for the hole card (index 1) of the dealer
-// 
-// Displaying the information of the game
-// 
-// 
 public class RoundOfBlackjack {
     public static int DELAY_BETWEEN_ACTIONS = 1000; //ms
     private BlackjackPlayer[] players;
@@ -175,6 +156,7 @@ public class RoundOfBlackjack {
             for (int j = 0; j < players[x].getNumOfHands(); j++) {
                 BlackjackHand playerHand = players[x].getHand(j);
                 int playerScore = playerHand.getHandValue();
+                players[x].resetStake(j);
                 if (players[x].getHand(j).isBlackjack() && dealerScore != 21) { // player has blackjack and dealer
                                                                                 // doesn't
                     players[x].addBank((2 * players[x].getStake(j))); // pay x2
