@@ -106,12 +106,10 @@ public class RoundOfBlackjack {
         System.out.println("");
         for (int i = 0; i < numPlayers; i++){
             player = getPlayer(i);
-            players[i]
             if (player == null || player.isBankrupt()){
                 continue;
             }
             //implement logic for blackjack and continue with current card. TODO
-            pl
         }
     }
 
