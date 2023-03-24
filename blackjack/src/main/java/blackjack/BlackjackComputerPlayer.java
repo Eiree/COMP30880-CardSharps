@@ -57,23 +57,19 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
     }
 
     //always false computer never splits
-    @Override
     boolean shouldSplit(BlackjackDeck deck, int handIndex) {
         return false;
     }
 
     //hit, double, stand according to table
-    @Override
     boolean shouldHit(BlackjackDeck deck, int handIndex) {
         return false;
     }
 
-    @Override
     boolean shouldDouble(BlackjackDeck deck, int handIndex) {
         return false;
     }
 
-    @Override
     boolean shouldStand(BlackjackDeck deck, int handIndex) {
         return false;
     }

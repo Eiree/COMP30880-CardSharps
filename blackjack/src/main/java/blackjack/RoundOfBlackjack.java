@@ -36,14 +36,9 @@ public class RoundOfBlackjack {
         numPlayers = players.length;
         System.out.println("\n\nNew round:\n\n");
         deal();
-<<<<<<< HEAD
         openRound();
 
         //openbetting needs input for stake
-=======
-        dealer = new BlackjackHumanPlayer("dealer",1000);
-
->>>>>>> 5c6d62dc4562669a97b57083b84b9d79a3cde604
 
         //conditions to deal
         //openRound();
@@ -145,12 +140,8 @@ public class RoundOfBlackjack {
         }
 
         //3)Dealer gets two cards
-<<<<<<< HEAD
 
         dealer.dealTo(deck, 0);
-=======
-        dealer.dealTo(deck,0); //dealer has no steak
->>>>>>> 5c6d62dc4562669a97b57083b84b9d79a3cde604
         System.out.println("The dealers first card is a " + dealer.getCard(0, 0).getName());
 
         //4)a)Human player while not bust decides move
@@ -168,7 +159,7 @@ public class RoundOfBlackjack {
         }*/
 
         for (int i=0; i<players[0].getNumOfHands(); i++){
-            while(!players[0].isBust(i)) {      //need an isStand method
+            while(!players[0].isBust(0)) {      //need an isStand method
                 players[0].nextAction(deck, i);
             }
         }
