@@ -127,12 +127,11 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
     // }
 
 
-    public boolean hit(BlackjackDeck deck, int handIndex){ //TODO
+    public void hit(BlackjackDeck deck, int handIndex){ //TODO
         //implement hit functionality
         System.out.println("\n> " + getName() + " says: Hit!");
         hand[handIndex].addCard(deck.dealNext());
         System.out.println(hand[handIndex]);
-        return true;
     }
 
     public void stand(int handIndex){ //TODO
@@ -221,10 +220,8 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         }
         //TODO see functioning
         else{
-            if(shouldHit(deck, handIndex, dealerCard)){
-                System.out.println("SHOULD HIT");
-                System.out.println(hit(deck, handIndex));
-            System.out.println("HAS HIT");}
+            if(shouldHit(deck, handIndex, dealerCard))
+                hit(deck, handIndex);
             else if(shouldStand(deck, handIndex, dealerCard))
                 stand(handIndex);
             else if(shouldDouble(deck, handIndex,dealerCard))
