@@ -188,7 +188,7 @@ public class RoundOfBlackjack {
             dealer.getHand(0).toString();
             if (dealer.getHand(0).getHandValue() > 21){
                 dealer.getHand(0).isBust();
-                dealer.nextAction(deck, 0 ,null);
+                dealer.nextAction(deck, dealer.getHand(0), dealer ,null);
             }
         }
         int dealerScore = dealer.getHand(0).getHandValue();
@@ -197,11 +197,11 @@ public class RoundOfBlackjack {
             for (int j=0; j<players[i].getNumOfHands(); j++){
                 if(players[i].getHand(j).isWon()){    //isBlackjack
                     players[i].addBank(2*players[i].getHand(j).getStake());
-                    System.out.println("Congratulations " + players[i].getName() + " you won you got Blackjack " + 2*players[i].getStake(j));
+                    System.out.println("Congratulations " + players[i].getName() + " you won you got Blackjack " + 2*players[i].getHand(j).getStake());
                 }
                 else if(dealerScore < players[0].getHand(j).getHandValue()){
                     players[i].addBank(2*players[i].getHand(j).getStake());
-                    System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getStake(j));
+                    System.out.println("Congratulations " + players[i].getName() + " you won " + 2*players[i].getHand(j).getStake());
 
                 }
                 else if(players[i].getHand(j).isDraw()){  //draw score dealer=player & not blackjack
