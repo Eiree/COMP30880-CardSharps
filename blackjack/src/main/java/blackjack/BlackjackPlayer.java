@@ -100,6 +100,12 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         hand[0] = deck.dealHand();
         stake[0] = originalStake;
     }
+
+
+    public void addBank(int addition){
+        bank += addition;
+    }
+
     //TODO
 
     // // player actions
@@ -167,7 +173,7 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         return true;
     }
 
-    public void openBetting(int handIndex){ //Add player input for amount of the bet
+    /*public void openBetting(int handIndex){ //Add player input for amount of the bet
         if (bank == 0){
             return;
         }
@@ -175,6 +181,16 @@ abstract class BlackjackPlayer { //reference player.java, humanplayer.java and c
         stake[handIndex]++;    // Player Input
         bank--;     //Plyaer INput
         
+        System.out.println("\n> " + getName() + " says: I open with one chip!\n");
+    }*/
+    public void openBetting(){ //Add player input for amount of the bet
+        if (bank == 0){
+            return;
+        }
+
+        stake[0]++;    // Player Input
+        bank--;     //Player Input
+
         System.out.println("\n> " + getName() + " says: I open with one chip!\n");
     }
    
