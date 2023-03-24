@@ -70,9 +70,11 @@ public class BlackjackComputerPlayer extends BlackjackPlayer{ // error caused by
         System.out.println("Dealer card: " + dealerCard.getValue());
         System.out.println("Hand Value: " + this.getHand(handIndex).getHandValue());
         if(HIT_MOVE == DECISION_MATRIX[this.getHand(handIndex).getHandValue()][dealerCard.getValue()]) {
+            System.out.println("MOVE FOUND");
             return true;
         }
         else {
+            System.out.println("ERROR");
             return false;
         }
     }
